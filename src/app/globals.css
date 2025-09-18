@@ -1,0 +1,49 @@
+@import "tailwindcss";
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+  --chisco-black: #0B0B0D;
+  --chisco-ink: #12141A;
+  --chisco-navy: #E53E3E;
+  --chisco-petrol: #FF6B35;
+  --chisco-amber: #FF8C42;
+  --chisco-steel: #6B7280;
+  --chisco-surface: #F8FAFC;
+  --danger: #E11D48;
+  --success: #059669;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-afacad);
+  --font-body: var(--font-inter);
+  --font-mono: var(--font-geist-mono);
+  --color-chisco-black: var(--chisco-black);
+  --color-chisco-ink: var(--chisco-ink);
+  --color-chisco-navy: var(--chisco-navy);
+  --color-chisco-petrol: var(--chisco-petrol);
+  --color-chisco-amber: var(--chisco-amber);
+  --color-chisco-steel: var(--chisco-steel);
+  --color-chisco-surface: var(--chisco-surface);
+  --color-danger: var(--danger);
+  --color-success: var(--success);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-afacad), Arial, Helvetica, sans-serif;
+}
+
+.bg-hero-background {
+  background-image: url('/background-image.png');
+}

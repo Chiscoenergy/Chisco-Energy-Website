@@ -1,0 +1,72 @@
+[
+  {
+    "id": "1",
+    "slug": "automotive-gas-oil-ago-20l",
+    "title": "Automotive Gas Oil (AGO) - 20L",
+    "excerpt": "High-quality diesel fuel for automotive and industrial use.",
+    "description": "Premium Automotive Gas Oil (AGO) suitable for diesel engines in vehicles and machinery. Meets international standards for performance and efficiency.",
+    "price": 15000,
+    "images": ["/images/ago-20l.jpg", "/images/ago-20l-2.jpg"],
+    "sku": "AGO-20L-001",
+    "packSize": "20L",
+    "availability": "in-stock",
+    "tags": ["diesel", "fuel", "automotive"],
+    "createdAt": "2025-09-16T00:00:00Z"
+  },
+  {
+    "id": "2",
+    "slug": "diesel-fuel-210l",
+    "title": "Diesel Fuel - 210L",
+    "excerpt": "Bulk diesel fuel for industrial and commercial applications.",
+    "description": "Reliable diesel fuel in 210L drums, perfect for construction sites, manufacturing plants, and large fleets. Consistent quality and timely delivery.",
+    "price": 75000,
+    "images": ["/images/diesel-210l.jpg"],
+    "sku": "DSL-210L-002",
+    "packSize": "210L",
+    "availability": "in-stock",
+    "tags": ["diesel", "bulk", "industrial"],
+    "createdAt": "2025-09-16T00:00:00Z"
+  },
+  {
+    "id": "3",
+    "slug": "lubricants-engine-oil-5l",
+    "title": "Engine Lubricants - 5L",
+    "excerpt": "Premium engine oil for optimal performance and protection.",
+    "description": "High-grade lubricants designed for diesel engines. Reduces wear, improves efficiency, and extends engine life. Suitable for various vehicle types.",
+    "price": 8000,
+    "images": ["/images/lubricants-5l.jpg"],
+    "sku": "LUB-5L-003",
+    "packSize": "5L",
+    "availability": "in-stock",
+    "tags": ["lubricants", "oil", "maintenance"],
+    "createdAt": "2025-09-16T00:00:00Z"
+  },
+  {
+    "id": "4",
+    "slug": "industrial-fuel-oil-1000l",
+    "title": "Industrial Fuel Oil - 1000L",
+    "excerpt": "Heavy fuel oil for industrial heating and power generation.",
+    "description": "Specialized fuel oil for industrial applications including boilers, furnaces, and power plants. High energy content with reliable supply.",
+    "price": 300000,
+    "images": ["/images/industrial-fuel-1000l.jpg"],
+    "sku": "IFO-1000L-004",
+    "packSize": "1000L",
+    "availability": "pre-order",
+    "tags": ["industrial", "fuel", "heating"],
+    "createdAt": "2025-09-16T00:00:00Z"
+  },
+  {
+    "id": "5",
+    "slug": "premium-gasoline-20l",
+    "title": "Premium Gasoline - 20L",
+    "excerpt": "High-octane gasoline for superior engine performance.",
+    "description": "Premium unleaded gasoline with additives for better fuel efficiency and engine cleanliness. Ideal for high-performance vehicles.",
+    "price": 18000,
+    "images": ["/images/gasoline-20l.jpg"],
+    "sku": "GAS-20L-005",
+    "packSize": "20L",
+    "availability": "in-stock",
+    "tags": ["gasoline", "premium", "automotive"],
+    "createdAt": "2025-09-16T00:00:00Z"
+  }
+]
