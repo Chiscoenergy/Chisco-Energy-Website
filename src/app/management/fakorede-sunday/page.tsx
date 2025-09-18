@@ -36,7 +36,7 @@ export default function FakoredeSundayPage() {
             <p className="text-chisco-steel mb-6">
               Fakorede Sunday serves as Head of Accounts at Chisco Energy, bringing extensive
               experience in financial management, accounting, and fiscal operations. His expertise
-              ensures the company's financial health and compliance with regulatory standards,
+              ensures the company&apos;s financial health and compliance with regulatory standards,
               supporting sustainable growth and operational efficiency.
             </p>
 
@@ -59,7 +59,7 @@ export default function FakoredeSundayPage() {
 
             <h3 className="text-2xl font-semibold text-chisco-navy mb-4">Key Expertise</h3>
             <p className="text-chisco-steel mb-6">
-              Fakorede's expertise spans various aspects of financial management:
+              Fakorede&apos;s expertise spans various aspects of financial management:
             </p>
             <ul className="text-chisco-steel mb-6 space-y-2">
               <li>• Corporate accounting and financial reporting</li>
@@ -74,15 +74,15 @@ export default function FakoredeSundayPage() {
               Fakorede is dedicated to maintaining the highest standards of financial integrity
               and transparency. His meticulous approach to accounting ensures accurate financial
               records, timely reporting, and strategic financial decision-making that supports
-              Chisco Energy's long-term objectives.
+              Chisco Energy&apos;s long-term objectives.
             </p>
 
             <h3 className="text-2xl font-semibold text-chisco-navy mb-4">Industry Contributions</h3>
             <p className="text-chisco-steel mb-6">
               Through his leadership in financial operations, Fakorede has helped establish
-              robust financial systems and processes that support Chisco Energy's growth and
+              robust financial systems and processes that support Chisco Energy&apos;s growth and
               operational success. His focus on financial discipline and efficiency contributes
-              to the company's overall stability and profitability.
+              to the company&apos;s overall stability and profitability.
             </p>
           </div>
         </div>
@@ -109,7 +109,7 @@ export default function FakoredeSundayPage() {
             <p className="text-chisco-steel mb-6">
               Fakorede Sunday serves as Head of Accounts at Chisco Energy, bringing extensive
               experience in financial management, accounting, and fiscal operations. His expertise
-              ensures the company's financial health and compliance with regulatory standards,
+              ensures the company&apos;s financial health and compliance with regulatory standards,
               supporting sustainable growth and operational efficiency.
             </p>
 
@@ -132,7 +132,7 @@ export default function FakoredeSundayPage() {
 
             <h3 className="text-2xl font-semibold text-chisco-navy mb-4">Key Expertise</h3>
             <p className="text-chisco-steel mb-6">
-              Fakorede's expertise spans various aspects of financial management:
+              Fakorede&apos;s expertise spans various aspects of financial management:
             </p>
             <ul className="text-chisco-steel mb-6 space-y-2">
               <li>• Corporate accounting and financial reporting</li>
@@ -147,15 +147,15 @@ export default function FakoredeSundayPage() {
               Fakorede is dedicated to maintaining the highest standards of financial integrity
               and transparency. His meticulous approach to accounting ensures accurate financial
               records, timely reporting, and strategic financial decision-making that supports
-              Chisco Energy's long-term objectives.
+              Chisco Energy&apos;s long-term objectives.
             </p>
 
             <h3 className="text-2xl font-semibold text-chisco-navy mb-4">Industry Contributions</h3>
             <p className="text-chisco-steel mb-6">
               Through his leadership in financial operations, Fakorede has helped establish
-              robust financial systems and processes that support Chisco Energy's growth and
+              robust financial systems and processes that support Chisco Energy&apos;s growth and
               operational success. His focus on financial discipline and efficiency contributes
-              to the company's overall stability and profitability.
+              to the company&apos;s overall stability and profitability.
             </p>
           </div>
         </div>

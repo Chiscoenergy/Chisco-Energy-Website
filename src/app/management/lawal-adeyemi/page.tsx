@@ -35,7 +35,7 @@ export default function LawalAdeyemiPage() {
 
             <p className="text-chisco-steel mb-6">
               Lawal Adeyemi serves as Head of Operations & Supply Chain at Chisco Energy,
-              bringing extensive accounting and operational experience to lead the company's
+              bringing extensive accounting and operational experience to lead the company&apos;s
               nationwide operations. As an Associate Member of the Institute of Chartered
               Accountants of Nigeria, he combines financial acumen with operational expertise
               to optimize supply chain management and ensure efficient energy distribution.
@@ -60,7 +60,7 @@ export default function LawalAdeyemiPage() {
 
             <h3 className="text-2xl font-semibold text-chisco-navy mb-4">Supply Chain Expertise</h3>
             <p className="text-chisco-steel mb-6">
-              Lawal's expertise in supply chain management includes:
+              Lawal&apos;s expertise in supply chain management includes:
             </p>
             <ul className="text-chisco-steel mb-6 space-y-2">
               <li>• Strategic supply chain planning and optimization</li>
@@ -80,7 +80,7 @@ export default function LawalAdeyemiPage() {
 
             <h3 className="text-2xl font-semibold text-chisco-navy mb-4">National Operations Oversight</h3>
             <p className="text-chisco-steel mb-6">
-              Lawal oversees Chisco Energy's extensive network of stations and depots across
+              Lawal oversees Chisco Energy&apos;s extensive network of stations and depots across
               Nigeria. His leadership ensures consistent service quality, operational reliability,
               and efficient distribution of energy products nationwide. He works closely with
               regional teams to maintain operational excellence and customer satisfaction.
@@ -90,7 +90,7 @@ export default function LawalAdeyemiPage() {
             <p className="text-chisco-steel mb-6">
               Lawal is committed to continuous improvement and innovation in operations. His
               focus on operational efficiency, supply chain optimization, and team development
-              contributes significantly to Chisco Energy's position as a reliable energy solutions
+              contributes significantly to Chisco Energy&apos;s position as a reliable energy solutions
               provider.
             </p>
           </div>

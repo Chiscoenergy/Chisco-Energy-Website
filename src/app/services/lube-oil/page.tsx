@@ -116,7 +116,7 @@ export default function LubeOilPage() {
           <div className="bg-gradient-to-r from-chisco-petrol/10 to-chisco-navy/10 rounded-2xl p-8 border border-chisco-petrol/20">
             <div className="text-center mb-8">
               <h2 className="text-3xl md:text-4xl font-heading font-bold text-chisco-navy mb-4">
-                Need Guidance? We're Here to Help!
+                Need Guidance? We&apos;re Here to Help!
               </h2>
               <p className="text-lg text-chisco-steel max-w-2xl mx-auto">
                 Choosing the right lubricant for your vehicle, fleet, or machinery is crucial for optimal performance and longevity.

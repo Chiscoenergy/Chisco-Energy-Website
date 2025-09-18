@@ -184,7 +184,7 @@ export default function GasPage() {
             <div className="bg-gradient-to-br from-chisco-petrol/10 to-chisco-navy/10 rounded-2xl p-8 border border-chisco-petrol/20">
               <h3 className="text-2xl font-heading font-bold text-chisco-navy mb-4">For Businesses</h3>
               <p className="text-chisco-ink leading-relaxed mb-4">
-                Whether you're running a business or powering your home, Chisco Energy is the partner you can trust to deliver the energy you need.
+                Whether you&apos;re running a business or powering your home, Chisco Energy is the partner you can trust to deliver the energy you need.
               </p>
               <ul className="space-y-2 text-chisco-ink">
                 <li className="flex items-center">

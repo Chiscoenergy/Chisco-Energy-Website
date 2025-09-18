@@ -45,7 +45,7 @@ export default function Partners() {
             Trusted by Industry Leaders
           </h2>
           <p className="text-chisco-steel max-w-2xl mx-auto">
-            We proudly serve some of Nigeria's most respected companies across various sectors
+            We proudly serve some of Nigeria&apos;s most respected companies across various sectors
           </p>
         </motion.div>
 

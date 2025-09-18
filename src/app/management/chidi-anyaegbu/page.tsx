@@ -36,13 +36,13 @@ export default function ChidiAnyaegbuPage() {
             <p className="text-chisco-steel mb-6">
               Chidi Anyaegbu is a seasoned entrepreneur and business leader with over 30 years of
               experience in the energy sector. As CEO and Chairman of Chisco Energy, he has been
-              instrumental in transforming the company into one of Nigeria's leading energy
+              instrumental in transforming the company into one of Nigeria&apos;s leading energy
               distribution companies.
             </p>
 
             <h3 className="text-2xl font-semibold text-chisco-navy mb-4">Professional Background</h3>
             <p className="text-chisco-steel mb-6">
-              Chidi holds a Master's degree in Business Administration and has extensive experience
+              Chidi holds a Master&apos;s degree in Business Administration and has extensive experience
               in corporate finance, strategic planning, and business development. His career spans
               multiple industries including energy, telecommunications, and manufacturing.
             </p>
@@ -69,10 +69,10 @@ export default function ChidiAnyaegbuPage() {
 
             <h3 className="text-2xl font-semibold text-chisco-navy mb-4">Vision for Chisco Energy</h3>
             <p className="text-chisco-steel mb-6">
-              Under Chidi's leadership, Chisco Energy continues to expand its footprint across
+              Under Chidi&apos;s leadership, Chisco Energy continues to expand its footprint across
               Nigeria, providing reliable energy solutions while contributing to economic
               development and job creation. His commitment to excellence and innovation drives
-              the company's mission to be the trusted source for energy solutions.
+              the company&apos;s mission to be the trusted source for energy solutions.
             </p>
           </div>
         </div>

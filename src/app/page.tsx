@@ -410,7 +410,7 @@ export default function Home() {
                   Our Mission
                 </h3>
                 <p className="text-chisco-steel leading-relaxed">
-                  To provide reliable, high-quality fuel solutions that power Nigeria's industrial and commercial sectors, ensuring consistent supply and exceptional service to all our clients.
+                  To provide reliable, high-quality fuel solutions that power Nigeria&apos;s industrial and commercial sectors, ensuring consistent supply and exceptional service to all our clients.
                 </p>
               </div>
             </div>

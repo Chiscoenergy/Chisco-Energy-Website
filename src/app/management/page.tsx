@@ -167,7 +167,7 @@ export default function ManagementPage() {
                 Our Leadership Philosophy
               </h2>
               <p className="text-white/80 text-lg leading-relaxed mb-8">
-                Our management team combines decades of experience in the energy sector with innovative thinking to drive Chisco Energy's mission of providing reliable, high-quality fuel solutions across Nigeria.
+                Our management team combines decades of experience in the energy sector with innovative thinking to drive Chisco Energy&apos;s mission of providing reliable, high-quality fuel solutions across Nigeria.
               </p>
               <div className="grid md:grid-cols-3 gap-6 text-center">
                 <div className="bg-white/10 backdrop-blur-xl rounded-2xl p-6 border border-white/20">

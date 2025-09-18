@@ -35,9 +35,9 @@ export default function ChidiAnyaegbuJrPage() {
 
             <p className="text-chisco-steel mb-6">
               Chidi Anyaegbu Jr. serves as the Managing Director of Chisco Energy, bringing
-              dynamic leadership and strategic vision to the company's operations. With a
+              dynamic leadership and strategic vision to the company&apos;s operations. With a
               strong background in business administration and operational management, he
-              plays a pivotal role in driving the company's growth and market expansion.
+              plays a pivotal role in driving the company&apos;s growth and market expansion.
             </p>
 
             <h3 className="text-2xl font-semibold text-chisco-navy mb-4">Professional Background</h3>
@@ -70,7 +70,7 @@ export default function ChidiAnyaegbuJrPage() {
               Under his leadership, Chisco Energy has strengthened its position in the energy
               market through strategic partnerships, operational improvements, and commitment
               to delivering reliable energy solutions. His focus on operational efficiency and
-              customer-centric approaches continues to drive the company's success and growth.
+              customer-centric approaches continues to drive the company&apos;s success and growth.
             </p>
           </div>
         </div>

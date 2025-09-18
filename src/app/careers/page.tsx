@@ -23,7 +23,7 @@ export default function CareersPage() {
               Build the Future of Petroleum with Us
             </h1>
             <p className="text-lg md:text-xl text-chisco-steel max-w-2xl mx-auto leading-relaxed">
-              Join our dynamic team and contribute to Nigeria's energy sector excellence
+              Join our dynamic team and contribute to Nigeria&apos;s energy sector excellence
             </p>
           </motion.div>
         </div>
@@ -46,15 +46,15 @@ export default function CareersPage() {
                   </svg>
                 </div>
                 <h2 className="text-2xl md:text-3xl font-heading font-bold text-chisco-navy mb-4">
-                  We're Not Hiring at the Moment
+                  We&apos;re Not Hiring at the Moment
                 </h2>
                 <p className="text-chisco-steel text-lg leading-relaxed mb-8">
-                  Thank you for your interest in joining Chisco Energy. Currently, we don't have any job openings.
+                  Thank you for your interest in joining Chisco Energy. Currently, we don&apos;t have any job openings.
                   However, we encourage you to stay connected with us through our social media platforms.
                 </p>
                 <p className="text-chisco-steel text-base leading-relaxed mb-8">
                   We believe in building a community that shares our passion for excellence and innovation.
-                  By following us on Instagram and LinkedIn, you'll stay updated on any new job opportunities and company news.
+                  By following us on Instagram and LinkedIn, you&apos;ll stay updated on any new job opportunities and company news.
                 </p>
                 <p className="text-chisco-navy font-semibold">
                   Your interest in Chisco Energy is appreciated, and we look forward to connecting with you in the future.
@@ -74,7 +74,7 @@ export default function CareersPage() {
                 Why Join Chisco Energy?
               </h2>
               <p className="text-white/80 text-lg max-w-2xl mx-auto">
-                Be part of a team that's shaping Nigeria's energy future
+                Be part of a team that&apos;s shaping Nigeria&apos;s energy future
               </p>
             </div>
 

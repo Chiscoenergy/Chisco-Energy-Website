@@ -21,7 +21,7 @@ export default function ProductsPage() {
 
   // Filter and sort products
   const filteredProducts = useMemo(() => {
-    let filtered = products.filter((product: Product) => {
+    const filtered = products.filter((product: Product) => {
       const matchesSearch = product.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
         product.excerpt?.toLowerCase().includes(searchQuery.toLowerCase());
       const matchesCategory = selectedCategory === 'all' ||
@@ -152,7 +152,7 @@ export default function ProductsPage() {
               No products found
             </h3>
             <p className="text-lg text-chisco-steel mb-8 max-w-md mx-auto">
-              Try adjusting your search terms or browse different categories to find what you're looking for.
+              Try adjusting your search terms or browse different categories to find what you&apos;re looking for.
             </p>
             <button
               onClick={() => {
@@ -177,7 +177,7 @@ export default function ProductsPage() {
                 </span>
                 {searchQuery && (
                   <span className="text-sm text-chisco-steel bg-chisco-surface px-3 py-1 rounded-full">
-                    Search: "{searchQuery}"
+                    Search: &quot;{searchQuery}&quot;
                   </span>
                 )}
               </div>

@@ -60,7 +60,7 @@ export default function KingsleyUzoaruPage() {
 
             <h3 className="text-2xl font-semibold text-chisco-navy mb-4">Key Initiatives</h3>
             <p className="text-chisco-steel mb-6">
-              Kingsley's initiatives have transformed Chisco Energy's HR practices:
+              Kingsley&apos;s initiatives have transformed Chisco Energy&apos;s HR practices:
             </p>
             <ul className="text-chisco-steel mb-6 space-y-2">
               <li>• Implementing comprehensive talent management programs</li>
@@ -75,12 +75,12 @@ export default function KingsleyUzoaruPage() {
               Kingsley believes in investing in employee growth and development. His programs
               focus on skill development, career progression, and creating opportunities for
               professional advancement. He works to ensure that employees have the resources
-              and support they need to excel in their roles and contribute to the company's success.
+              and support they need to excel in their roles and contribute to the company&apos;s success.
             </p>
 
             <h3 className="text-2xl font-semibold text-chisco-navy mb-4">Culture and Values</h3>
             <p className="text-chisco-steel mb-6">
-              Under Kingsley's leadership, Chisco Energy has strengthened its organizational
+              Under Kingsley&apos;s leadership, Chisco Energy has strengthened its organizational
               culture by promoting core values of integrity, excellence, innovation, and teamwork.
               His efforts in building a positive work environment have contributed to higher
               employee satisfaction and organizational performance.
@@ -88,9 +88,9 @@ export default function KingsleyUzoaruPage() {
 
             <h3 className="text-2xl font-semibold text-chisco-navy mb-4">Strategic HR Vision</h3>
             <p className="text-chisco-steel mb-6">
-              Kingsley is committed to positioning HR as a strategic partner in Chisco Energy's
+              Kingsley is committed to positioning HR as a strategic partner in Chisco Energy&apos;s
               growth. His forward-thinking approach ensures that human capital strategies align
-              with business objectives, supporting the company's mission to be a leading energy
+              with business objectives, supporting the company&apos;s mission to be a leading energy
               solutions provider.
             </p>
           </div>

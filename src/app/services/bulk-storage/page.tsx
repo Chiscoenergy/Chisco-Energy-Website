@@ -128,8 +128,8 @@ export default function BulkStoragePage() {
               <div className="space-y-4">
                 <h3 className="text-xl font-heading font-bold text-chisco-navy">Reliable Supply Chain</h3>
                 <p className="text-chisco-ink leading-relaxed">
-                  Whether you're a retail station looking for a consistent supply or an industrial customer with specific energy needs,
-                  we've got you covered with our state-of-the-art bulk storage facilities.
+                  Whether you&apos;re a retail station looking for a consistent supply or an industrial customer with specific energy needs,
+                  we&apos;ve got you covered with our state-of-the-art bulk storage facilities.
                 </p>
               </div>
             </div>

@@ -37,7 +37,7 @@ export default function JosephKaluPage() {
               Joseph Kalu serves as Head of Trade & Business Strategy at Chisco Energy, bringing
               extensive experience in strategic planning, business development, and market analysis.
               His expertise in economics and business administration enables him to drive innovative
-              strategies that enhance Chisco Energy's competitive position in the energy market.
+              strategies that enhance Chisco Energy&apos;s competitive position in the energy market.
             </p>
 
             <h3 className="text-2xl font-semibold text-chisco-navy mb-4">Professional Background</h3>
@@ -59,7 +59,7 @@ export default function JosephKaluPage() {
 
             <h3 className="text-2xl font-semibold text-chisco-navy mb-4">Key Achievements</h3>
             <p className="text-chisco-steel mb-6">
-              Joseph's strategic initiatives have contributed significantly to Chisco Energy's
+              Joseph&apos;s strategic initiatives have contributed significantly to Chisco Energy&apos;s
               growth and market presence. His work in trade strategy and business development
               has helped establish new market channels, strengthen supplier relationships, and
               create competitive advantages in the energy distribution sector.
