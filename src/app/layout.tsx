@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Afacad, Inter } from "next/font/google";
 import "./globals.css";
+import ChatButton from "@/components/ChatButton";
 
 const afacad = Afacad({
   variable: "--font-afacad",
@@ -34,6 +35,7 @@ export default function RootLayout({
         className={`${afacad.variable} ${inter.variable} antialiased`}
       >
         {children}
+        <ChatButton />
       </body>
     </html>
   );

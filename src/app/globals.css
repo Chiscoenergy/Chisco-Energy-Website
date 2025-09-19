@@ -47,3 +47,14 @@ body {
 .bg-hero-background {
   background-image: url('/background-image.png');
 }
+
+/* Animation delay classes for chat typing indicator */
+.animate-bounce-delay-100 {
+  animation: bounce 1s infinite;
+  animation-delay: 0.1s;
+}
+
+.animate-bounce-delay-200 {
+  animation: bounce 1s infinite;
+  animation-delay: 0.2s;
+}

@@ -54,12 +54,12 @@ export default function ProductDetailPage() {
       {/* Breadcrumb */}
       <div className="bg-white border-b">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
-          <nav className="flex items-center space-x-2 text-sm text-chisco-steel">
+          <nav className="flex items-center space-x-2 text-sm text-gray-600">
             <Link href="/" className="hover:text-chisco-navy">Home</Link>
             <span>/</span>
             <Link href="/products" className="hover:text-chisco-navy">Products</Link>
             <span>/</span>
-            <span className="text-chisco-ink">{product.title}</span>
+            <span className="text-gray-900 font-medium">{product.title}</span>
           </nav>
         </div>
       </div>
@@ -87,8 +87,8 @@ export default function ProductDetailPage() {
                     key={index}
                     onClick={() => setSelectedImage(index)}
                     className={`flex-shrink-0 w-20 h-20 relative rounded-md overflow-hidden border-2 ${selectedImage === index
-                        ? 'border-chisco-petrol'
-                        : 'border-gray-200'
+                      ? 'border-chisco-petrol'
+                      : 'border-gray-200'
                       }`}
                     aria-label={`View ${product.title} image ${index + 1}`}
                   >
@@ -111,7 +111,7 @@ export default function ProductDetailPage() {
                 {product.title}
               </h1>
               {product.sku && (
-                <p className="text-sm text-chisco-steel">SKU: {product.sku}</p>
+                <p className="text-sm text-gray-600">SKU: {product.sku}</p>
               )}
             </div>
 
@@ -129,10 +129,10 @@ export default function ProductDetailPage() {
             {/* Availability */}
             <div className="flex items-center space-x-2">
               <div className={`w-3 h-3 rounded-full ${product.availability === 'in-stock'
-                  ? 'bg-green-500'
-                  : product.availability === 'out-of-stock'
-                    ? 'bg-red-500'
-                    : 'bg-yellow-500'
+                ? 'bg-green-500'
+                : product.availability === 'out-of-stock'
+                  ? 'bg-red-500'
+                  : 'bg-yellow-500'
                 }`} />
               <span className="text-sm font-medium capitalize">
                 {product.availability?.replace('-', ' ') || 'In Stock'}
@@ -141,7 +141,7 @@ export default function ProductDetailPage() {
 
             {/* Quantity Selector */}
             <div className="space-y-2">
-              <label htmlFor="quantity" className="block text-sm font-medium text-chisco-ink">
+              <label htmlFor="quantity" className="block text-sm font-medium text-gray-900">
                 Quantity
               </label>
               <div className="flex items-center space-x-3">
@@ -185,7 +185,7 @@ export default function ProductDetailPage() {
             {/* Back to Products */}
             <Link
               href="/products"
-              className="inline-block text-chisco-navy hover:text-chisco-petrol font-medium"
+              className="inline-block text-gray-700 hover:text-chisco-navy font-medium"
             >
               ← Back to Products
             </Link>
@@ -202,7 +202,7 @@ export default function ProductDetailPage() {
                   Description
                 </h2>
                 <div className="prose prose-gray max-w-none">
-                  <p className="text-chisco-steel leading-relaxed">
+                  <p className="text-gray-700 leading-relaxed">
                     {product.description}
                   </p>
                 </div>
@@ -217,29 +217,29 @@ export default function ProductDetailPage() {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div className="space-y-2">
                   <div className="flex justify-between py-2 border-b border-gray-100">
-                    <span className="font-medium text-chisco-ink">Pack Size</span>
-                    <span className="text-chisco-steel">{product.packSize || 'N/A'}</span>
+                    <span className="font-medium text-gray-900">Pack Size</span>
+                    <span className="text-gray-700">{product.packSize || 'N/A'}</span>
                   </div>
                   <div className="flex justify-between py-2 border-b border-gray-100">
-                    <span className="font-medium text-chisco-ink">SKU</span>
-                    <span className="text-chisco-steel">{product.sku || 'N/A'}</span>
+                    <span className="font-medium text-gray-900">SKU</span>
+                    <span className="text-gray-700">{product.sku || 'N/A'}</span>
                   </div>
                   <div className="flex justify-between py-2 border-b border-gray-100">
-                    <span className="font-medium text-chisco-ink">Availability</span>
-                    <span className="text-chisco-steel capitalize">
+                    <span className="font-medium text-gray-900">Availability</span>
+                    <span className="text-gray-700 capitalize">
                       {product.availability?.replace('-', ' ') || 'In Stock'}
                     </span>
                   </div>
                 </div>
                 <div className="space-y-2">
                   <div className="flex justify-between py-2 border-b border-gray-100">
-                    <span className="font-medium text-chisco-ink">Price per Unit</span>
-                    <span className="text-chisco-steel">₦{product.price.toLocaleString()}</span>
+                    <span className="font-medium text-gray-900">Price per Unit</span>
+                    <span className="text-gray-700">₦{product.price.toLocaleString()}</span>
                   </div>
                   {product.tags && product.tags.length > 0 && (
                     <div className="flex justify-between py-2 border-b border-gray-100">
-                      <span className="font-medium text-chisco-ink">Categories</span>
-                      <span className="text-chisco-steel">
+                      <span className="font-medium text-gray-900">Categories</span>
+                      <span className="text-gray-700">
                         {product.tags.map(tag => tag.charAt(0).toUpperCase() + tag.slice(1)).join(', ')}
                       </span>
                     </div>
@@ -254,7 +254,7 @@ export default function ProductDetailPage() {
                 Delivery Information
               </h2>
               <div className="bg-gray-50 rounded-lg p-4">
-                <ul className="space-y-2 text-chisco-steel">
+                <ul className="space-y-2 text-gray-700">
                   <li>• Delivery times vary by location and product availability</li>
                   <li>• Bulk orders may require special arrangements</li>
                   <li>• All deliveries are arranged via WhatsApp after order confirmation</li>

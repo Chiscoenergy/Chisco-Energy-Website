@@ -13,7 +13,7 @@ interface CheckoutDialogProps {
 
 interface CheckoutFormData {
   fullName: string;
-  phone: string;
+  phone?: string;
   address: string;
   dateTime?: string;
   additionalNotes?: string;
@@ -129,11 +129,10 @@ export default function CheckoutDialog({ isOpen, onClose, onSuccess }: CheckoutD
             {/* Phone */}
             <div>
               <label htmlFor="phone" className="block text-sm font-medium text-chisco-ink mb-1">
-                Phone Number *
+                Phone Number
               </label>
               <input
                 {...register('phone', {
-                  required: 'Phone number is required',
                   pattern: {
                     value: /^[\+]?[0-9\-\s\(\)]{10,}$/,
                     message: 'Please enter a valid phone number'
@@ -142,11 +141,12 @@ export default function CheckoutDialog({ isOpen, onClose, onSuccess }: CheckoutD
                 type="tel"
                 id="phone"
                 className="w-full rounded-lg border border-chisco-steel px-3 py-2 focus:ring-2 focus:ring-chisco-petrol focus:border-transparent"
-                placeholder="+234 xxx xxx xxxx"
+                placeholder="+234 xxx xxx xxxx (optional)"
               />
               {errors.phone && (
                 <p className="text-danger text-sm mt-1">{errors.phone.message}</p>
               )}
+              <p className="text-xs text-chisco-steel mt-1">Optional - we&apos;ll contact you via WhatsApp</p>
             </div>
 
             {/* Delivery Address */}

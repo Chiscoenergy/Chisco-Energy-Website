@@ -91,9 +91,9 @@ export default function ProductsPage() {
                     placeholder="Search by name or description..."
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
-                    className="w-full pl-12 pr-4 py-4 rounded-2xl border border-white/30 bg-white/20 backdrop-blur-sm focus:ring-2 focus:ring-chisco-petrol focus:border-transparent transition-all duration-300 shadow-lg"
+                    className="w-full pl-12 pr-4 py-4 rounded-2xl border border-white/30 bg-white/20 backdrop-blur-sm focus:ring-2 focus:ring-chisco-petrol focus:border-transparent transition-all duration-300 shadow-lg placeholder:text-chisco-navy/70"
                   />
-                  <svg className="absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-chisco-steel" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <svg className="absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-chisco-navy/70" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                   </svg>
                 </div>
@@ -108,7 +108,7 @@ export default function ProductsPage() {
                   id="category-select"
                   value={selectedCategory}
                   onChange={(e) => setSelectedCategory(e.target.value)}
-                  className="w-full px-4 py-4 rounded-2xl border border-white/30 bg-white/20 backdrop-blur-sm focus:ring-2 focus:ring-chisco-petrol focus:border-transparent transition-all duration-300 appearance-none shadow-lg"
+                  className="w-full px-4 py-4 rounded-2xl border border-white/30 bg-white/20 backdrop-blur-sm focus:ring-2 focus:ring-chisco-petrol focus:border-transparent transition-all duration-300 appearance-none shadow-lg text-chisco-navy"
                 >
                   {categories.map((category: string) => (
                     <option key={category} value={category}>
@@ -127,7 +127,7 @@ export default function ProductsPage() {
                   id="sort-select"
                   value={sortBy}
                   onChange={(e) => setSortBy(e.target.value)}
-                  className="w-full px-4 py-4 rounded-2xl border border-white/30 bg-white/20 backdrop-blur-sm focus:ring-2 focus:ring-chisco-petrol focus:border-transparent transition-all duration-300 appearance-none shadow-lg"
+                  className="w-full px-4 py-4 rounded-2xl border border-white/30 bg-white/20 backdrop-blur-sm focus:ring-2 focus:ring-chisco-petrol focus:border-transparent transition-all duration-300 appearance-none shadow-lg text-chisco-navy"
                 >
                   <option value="name">Name (A-Z)</option>
                   <option value="price-low">Price: Low to High</option>

@@ -27,10 +27,10 @@ export default function NavBar({ onOpenCart, cartCount = 0 }: NavBarProps) {
 
       {/* Desktop Navigation */}
       <div className="hidden md:flex items-center space-x-8">
-        <Link href="#services" className="text-white hover:text-chisco-amber transition-colors">
+        <Link href="/#services" className="text-white hover:text-chisco-amber transition-colors">
           Services
         </Link>
-        <Link href="#about" className="text-white hover:text-chisco-amber transition-colors">
+        <Link href="/#about" className="text-white hover:text-chisco-amber transition-colors">
           About Us
         </Link>
         <Link href="/management" className="text-white hover:text-chisco-amber transition-colors">
@@ -38,9 +38,6 @@ export default function NavBar({ onOpenCart, cartCount = 0 }: NavBarProps) {
         </Link>
         <Link href="/careers" className="text-white hover:text-chisco-amber transition-colors">
           Careers
-        </Link>
-        <Link href="#contact" className="text-white hover:text-chisco-amber transition-colors">
-          Contact
         </Link>
         <Link href="/get-quote" className="text-white hover:text-chisco-amber transition-colors">
           Get Quote
@@ -96,14 +93,14 @@ export default function NavBar({ onOpenCart, cartCount = 0 }: NavBarProps) {
         <div className="absolute top-full left-0 right-0 bg-chisco-black border-t border-white/20 shadow-lg md:hidden">
           <div className="flex flex-col space-y-4 p-6">
             <Link
-              href="#services"
+              href="/#services"
               className="text-white hover:text-chisco-amber transition-colors py-2"
               onClick={() => setIsMenuOpen(false)}
             >
               Services
             </Link>
             <Link
-              href="#about"
+              href="/#about"
               className="text-white hover:text-chisco-amber transition-colors py-2"
               onClick={() => setIsMenuOpen(false)}
             >
@@ -122,13 +119,6 @@ export default function NavBar({ onOpenCart, cartCount = 0 }: NavBarProps) {
               onClick={() => setIsMenuOpen(false)}
             >
               Careers
-            </Link>
-            <Link
-              href="#contact"
-              className="text-white hover:text-chisco-amber transition-colors py-2"
-              onClick={() => setIsMenuOpen(false)}
-            >
-              Contact
             </Link>
             <Link
               href="/get-quote"
