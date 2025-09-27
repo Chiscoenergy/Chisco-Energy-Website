@@ -10,14 +10,8 @@ export interface WhatsAppOrderData {
 }
 
 export function generateWhatsAppMessage(orderData: WhatsAppOrderData): string {
-  const {
-    fullName,
-    address,
-    dateTime,
-    additionalNotes,
-    items,
-    subtotal,
-  } = orderData;
+  const { fullName, address, dateTime, additionalNotes, items, subtotal } =
+    orderData;
 
   let message = `*🛢️ CHISCO ENERGY - NEW ORDER*
 
@@ -38,7 +32,7 @@ export function generateWhatsAppMessage(orderData: WhatsAppOrderData): string {
     message += `
 ${index + 1}. *${item.title}*
    Quantity: ${item.qty}
-   Pack Size: ${item.packSize || 'N/A'}`;
+   Pack Size: ${item.packSize || "N/A"}`;
   });
 
   message += `

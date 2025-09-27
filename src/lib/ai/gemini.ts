@@ -1,15 +1,16 @@
 import { GoogleGenerativeAI } from "@google/generative-ai";
 
 // Use the actual API key from your .env.local
-const API_KEY = process.env.GEMINI_API_KEY || "AIzaSyBUJX9M0K4UE8S_tNd2hvDqvSr2RL2PgIw";
+const API_KEY =
+  process.env.GEMINI_API_KEY || "AIzaSyBUJX9M0K4UE8S_tNd2hvDqvSr2RL2PgIw";
 
 let genAI: GoogleGenerativeAI;
 let model: any;
 
 try {
-  console.log('🔑 Initializing Gemini with API key:', !!API_KEY);
-  console.log('🔑 API Key length:', API_KEY?.length);
-  
+  console.log("🔑 Initializing Gemini with API key:", !!API_KEY);
+  console.log("🔑 API Key length:", API_KEY?.length);
+
   genAI = new GoogleGenerativeAI(API_KEY);
   model = genAI.getGenerativeModel({
     model: "gemini-1.5-flash",
@@ -41,13 +42,11 @@ Guidelines:
 
 Always offer to connect them with our team via WhatsApp for specific quotes and orders.`,
   });
-  
-  console.log('✅ Gemini model initialized successfully');
+
+  console.log("✅ Gemini model initialized successfully");
 } catch (error) {
-  console.error('❌ Failed to initialize Gemini:', error);
+  console.error("❌ Failed to initialize Gemini:", error);
 }
-
-
 
 export interface ChatMessage {
   id: string;
@@ -62,11 +61,11 @@ export class GeminiChatService {
   async initializeChat() {
     try {
       if (!model) {
-        throw new Error('Gemini model not initialized');
+        throw new Error("Gemini model not initialized");
       }
-      
+
       if (!this.chat) {
-        console.log('🚀 Creating new chat session...');
+        console.log("🚀 Creating new chat session...");
         this.chat = model.startChat({
           history: [
             {
@@ -85,57 +84,65 @@ export class GeminiChatService {
             },
           ],
         });
-        console.log('✅ Chat session created');
+        console.log("✅ Chat session created");
       }
       return this.chat;
     } catch (error) {
-      console.error('❌ Error initializing chat:', error);
+      console.error("❌ Error initializing chat:", error);
       throw error;
     }
   }
 
   async sendMessage(message: string): Promise<string> {
     try {
-      console.log('🤖 Gemini sendMessage called with:', message);
-      
+      console.log("🤖 Gemini sendMessage called with:", message);
+
       if (!API_KEY) {
-        console.error('❌ No API key available');
-        throw new Error('Gemini API key not configured');
+        console.error("❌ No API key available");
+        throw new Error("Gemini API key not configured");
       }
-      
-      console.log('🔧 Initializing chat...');
+
+      console.log("🔧 Initializing chat...");
       const chat = await this.initializeChat();
-      
-      console.log('📤 Sending message to Gemini...');
+
+      console.log("📤 Sending message to Gemini...");
       const result = await chat.sendMessage(message);
-      
-      console.log('📥 Getting response...');
+
+      console.log("📥 Getting response...");
       const response = result.response;
       const text = response.text();
-      
-      console.log('✅ Success! Response length:', text.length);
+
+      console.log("✅ Success! Response length:", text.length);
       return text;
     } catch (error) {
       console.error("❌ Gemini API error:", error);
-      
+
       if (error instanceof Error) {
         console.error("❌ Error name:", error.name);
         console.error("❌ Error message:", error.message);
         console.error("❌ Error stack:", error.stack);
-        
+
         // Check for specific Google API errors
-        if (error.message.includes('API_KEY') || error.message.includes('INVALID_ARGUMENT')) {
+        if (
+          error.message.includes("API_KEY") ||
+          error.message.includes("INVALID_ARGUMENT")
+        ) {
           throw new Error(`API Key issue: ${error.message}`);
         }
-        if (error.message.includes('quota') || error.message.includes('RESOURCE_EXHAUSTED')) {
+        if (
+          error.message.includes("quota") ||
+          error.message.includes("RESOURCE_EXHAUSTED")
+        ) {
           throw new Error(`Quota exceeded: ${error.message}`);
         }
-        if (error.message.includes('PERMISSION_DENIED')) {
-          throw new Error(`Permission denied - check API key permissions: ${error.message}`);
+        if (error.message.includes("PERMISSION_DENIED")) {
+          throw new Error(
+            `Permission denied - check API key permissions: ${error.message}`
+          );
         }
         throw new Error(`Gemini API error: ${error.message}`);
       }
-      
+
       throw new Error(`Unknown error: ${String(error)}`);
     }
   }
