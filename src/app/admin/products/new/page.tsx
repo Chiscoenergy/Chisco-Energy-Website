@@ -52,7 +52,7 @@ export default function NewProductPage() {
     setFormData(prev => ({
       ...prev,
       [name]: value
-    } as ProductForm));
+    }));
   };
 
   const handleAddTag = (e: React.KeyboardEvent) => {
@@ -110,7 +110,7 @@ export default function NewProductPage() {
       formDataToSend.append('tags', formData.tags.join(', '));
 
       // Add images
-      formData.images.forEach((image, index) => {
+      formData.images.forEach((image) => {
         formDataToSend.append('images', image);
       });
 

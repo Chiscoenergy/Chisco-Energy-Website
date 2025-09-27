@@ -41,7 +41,7 @@ export async function PUT(
           .filter((tag) => tag.length > 0)
       : [];
 
-    const updates: Record<string, unknown> = {
+    const updates: Record<string, string | string[]> = {
       title: formData.get("title") as string,
       packSize: formData.get("packSize") as string,
       availability: formData.get("availability") as "in-stock" | "out-of-stock",
