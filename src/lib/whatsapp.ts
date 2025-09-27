@@ -2,7 +2,6 @@ import { CartItem } from "@/types/product";
 
 export interface WhatsAppOrderData {
   fullName: string;
-  phone?: string;
   address: string;
   dateTime?: string;
   additionalNotes?: string;
@@ -13,7 +12,6 @@ export interface WhatsAppOrderData {
 export function generateWhatsAppMessage(orderData: WhatsAppOrderData): string {
   const {
     fullName,
-    phone,
     address,
     dateTime,
     additionalNotes,
@@ -25,7 +23,6 @@ export function generateWhatsAppMessage(orderData: WhatsAppOrderData): string {
 
 *Customer Details:*
 👤 Name: ${fullName}
-📱 ${phone ? `Phone: ${phone}` : "Phone: (will provide via WhatsApp)"}
 📍 Delivery Address: ${address}`;
 
   if (dateTime) {
@@ -41,14 +38,14 @@ export function generateWhatsAppMessage(orderData: WhatsAppOrderData): string {
     message += `
 ${index + 1}. *${item.title}*
    Quantity: ${item.qty}
-   Unit Price: ₦${item.price.toLocaleString()}
-   Line Total: ₦${item.lineTotal.toLocaleString()}`;
+   Pack Size: ${item.packSize || 'N/A'}`;
   });
 
   message += `
 
-*💰 Order Summary:*
-Total Amount: *₦${subtotal.toLocaleString()}*`;
+*� Order Summary:*
+Total Items: *${items.length} product(s)*
+Total Quantity: *${items.reduce((sum, item) => sum + item.qty, 0)} units*`;
 
   if (additionalNotes) {
     message += `
@@ -61,9 +58,9 @@ ${additionalNotes}`;
 
 *⚡ Next Steps:*
 • Please confirm the order details
-• Provide delivery timeline
-• Confirm total payment amount
+• Provide delivery timeline and pricing
 • Arrange payment method
+• Confirm delivery address
 
 Thank you for choosing Chisco Energy! 🚛`;
 
@@ -72,7 +69,7 @@ Thank you for choosing Chisco Energy! 🚛`;
 
 export function generateWhatsAppUrl(
   message: string,
-  phoneNumber = "2348123456789"
+  phoneNumber = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || "234823636570"
 ): string {
   // Remove + and leading zeros from phone number for wa.me format
   const cleanPhone = phoneNumber.replace(/^\+?0*/, "");

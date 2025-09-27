@@ -1,10 +1,9 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useParams } from 'next/navigation';
 import Link from 'next/link';
 import Image from 'next/image';
-import { products } from '@/data/products';
 import { Product } from '@/types/product';
 import { useCartStore } from '@/lib/cart';
 
@@ -13,9 +12,43 @@ export default function ProductDetailPage() {
   const slug = params.slug as string;
   const [selectedImage, setSelectedImage] = useState(0);
   const [quantity, setQuantity] = useState(1);
+  const [product, setProduct] = useState<Product | null>(null);
+  const [loading, setLoading] = useState(true);
   const { addItem } = useCartStore();
 
-  const product = products.find((p: Product) => p.slug === slug);
+  useEffect(() => {
+    fetchProduct();
+  }, [slug]);
+
+  const fetchProduct = async () => {
+    try {
+      const response = await fetch('/api/products');
+      if (response.ok) {
+        const data = await response.json();
+        const foundProduct = data.products?.find((p: Product) => p.slug === slug);
+        setProduct(foundProduct || null);
+      } else {
+        console.error('Failed to fetch products');
+        setProduct(null);
+      }
+    } catch (error) {
+      console.error('Error fetching product:', error);
+      setProduct(null);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-chisco-surface flex items-center justify-center">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-chisco-amber mx-auto"></div>
+          <p className="mt-4 text-gray-600">Loading product...</p>
+        </div>
+      </div>
+    );
+  }
 
   if (!product) {
     return (
@@ -110,15 +143,9 @@ export default function ProductDetailPage() {
               <h1 className="text-3xl font-heading font-semibold text-chisco-ink mb-2">
                 {product.title}
               </h1>
-              {product.sku && (
-                <p className="text-sm text-gray-600">SKU: {product.sku}</p>
-              )}
             </div>
 
             <div className="flex items-center space-x-4">
-              <span className="text-3xl font-bold text-chisco-navy">
-                ₦{product.price.toLocaleString()}
-              </span>
               {product.packSize && (
                 <span className="px-3 py-1 bg-chisco-petrol/10 text-chisco-petrol rounded-md text-sm font-medium">
                   {product.packSize}
@@ -126,141 +153,54 @@ export default function ProductDetailPage() {
               )}
             </div>
 
-            {/* Availability */}
-            <div className="flex items-center space-x-2">
-              <div className={`w-3 h-3 rounded-full ${product.availability === 'in-stock'
-                ? 'bg-green-500'
-                : product.availability === 'out-of-stock'
-                  ? 'bg-red-500'
-                  : 'bg-yellow-500'
-                }`} />
-              <span className="text-sm font-medium capitalize">
-                {product.availability?.replace('-', ' ') || 'In Stock'}
-              </span>
-            </div>
-
-            {/* Quantity Selector */}
-            <div className="space-y-2">
-              <label htmlFor="quantity" className="block text-sm font-medium text-gray-900">
-                Quantity
-              </label>
-              <div className="flex items-center space-x-3">
-                <button
-                  onClick={() => handleQuantityChange(quantity - 1)}
-                  disabled={quantity <= 1}
-                  aria-label="Decrease quantity"
-                  className="w-10 h-10 rounded-md border border-chisco-steel flex items-center justify-center disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-50"
-                >
-                  -
-                </button>
-                <input
-                  id="quantity"
-                  type="number"
-                  min="1"
-                  max="999"
-                  value={quantity}
-                  onChange={(e) => handleQuantityChange(parseInt(e.target.value) || 1)}
-                  className="w-20 text-center rounded-md border border-chisco-steel px-3 py-2 focus:ring-2 focus:ring-chisco-petrol focus:border-transparent"
-                />
-                <button
-                  onClick={() => handleQuantityChange(quantity + 1)}
-                  disabled={quantity >= 999}
-                  aria-label="Increase quantity"
-                  className="w-10 h-10 rounded-md border border-chisco-steel flex items-center justify-center disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-50"
-                >
-                  +
-                </button>
-              </div>
-            </div>
-
-            {/* Add to Cart Button */}
-            <button
-              onClick={handleAddToCart}
-              disabled={product.availability === 'out-of-stock'}
-              className="w-full px-6 py-3 bg-chisco-amber text-chisco-black font-semibold rounded-md hover:brightness-95 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
-            >
-              {product.availability === 'out-of-stock' ? 'Out of Stock' : 'Add to Cart'}
-            </button>
-
-            {/* Back to Products */}
-            <Link
-              href="/products"
-              className="inline-block text-gray-700 hover:text-chisco-navy font-medium"
-            >
-              ← Back to Products
-            </Link>
-          </div>
-        </div>
-
-        {/* Product Details Tabs */}
-        <div className="mt-12 border-t pt-8">
-          <div className="space-y-6">
-            {/* Description */}
-            {product.description && (
-              <div>
-                <h2 className="text-xl font-heading font-semibold text-chisco-ink mb-4">
-                  Description
-                </h2>
-                <div className="prose prose-gray max-w-none">
-                  <p className="text-gray-700 leading-relaxed">
-                    {product.description}
-                  </p>
+            {/* Simple purchase controls (quantity + add to cart) */}
+            <div className="space-y-4">
+              <div className="space-y-2">
+                <label htmlFor="quantity" className="block text-sm font-medium text-gray-900">
+                  Quantity
+                </label>
+                <div className="flex items-center space-x-3">
+                  <button
+                    onClick={() => handleQuantityChange(quantity - 1)}
+                    disabled={quantity <= 1}
+                    aria-label="Decrease quantity"
+                    className="w-10 h-10 rounded-md border border-chisco-steel flex items-center justify-center disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-50"
+                  >
+                    -
+                  </button>
+                  <input
+                    id="quantity"
+                    type="number"
+                    min="1"
+                    max="999"
+                    value={quantity}
+                    onChange={(e) => handleQuantityChange(parseInt(e.target.value) || 1)}
+                    className="w-20 text-center rounded-md border border-chisco-steel px-3 py-2 focus:ring-2 focus:ring-chisco-petrol focus:border-transparent"
+                  />
+                  <button
+                    onClick={() => handleQuantityChange(quantity + 1)}
+                    disabled={quantity >= 999}
+                    aria-label="Increase quantity"
+                    className="w-10 h-10 rounded-md border border-chisco-steel flex items-center justify-center disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-50"
+                  >
+                    +
+                  </button>
                 </div>
               </div>
-            )}
 
-            {/* Specifications */}
-            <div>
-              <h2 className="text-xl font-heading font-semibold text-chisco-ink mb-4">
-                Specifications
-              </h2>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div className="space-y-2">
-                  <div className="flex justify-between py-2 border-b border-gray-100">
-                    <span className="font-medium text-gray-900">Pack Size</span>
-                    <span className="text-gray-700">{product.packSize || 'N/A'}</span>
-                  </div>
-                  <div className="flex justify-between py-2 border-b border-gray-100">
-                    <span className="font-medium text-gray-900">SKU</span>
-                    <span className="text-gray-700">{product.sku || 'N/A'}</span>
-                  </div>
-                  <div className="flex justify-between py-2 border-b border-gray-100">
-                    <span className="font-medium text-gray-900">Availability</span>
-                    <span className="text-gray-700 capitalize">
-                      {product.availability?.replace('-', ' ') || 'In Stock'}
-                    </span>
-                  </div>
-                </div>
-                <div className="space-y-2">
-                  <div className="flex justify-between py-2 border-b border-gray-100">
-                    <span className="font-medium text-gray-900">Price per Unit</span>
-                    <span className="text-gray-700">₦{product.price.toLocaleString()}</span>
-                  </div>
-                  {product.tags && product.tags.length > 0 && (
-                    <div className="flex justify-between py-2 border-b border-gray-100">
-                      <span className="font-medium text-gray-900">Categories</span>
-                      <span className="text-gray-700">
-                        {product.tags.map(tag => tag.charAt(0).toUpperCase() + tag.slice(1)).join(', ')}
-                      </span>
-                    </div>
-                  )}
-                </div>
-              </div>
-            </div>
+              <button
+                onClick={handleAddToCart}
+                className="w-full px-6 py-3 bg-chisco-amber text-chisco-black font-semibold rounded-md hover:brightness-95 transition-colors"
+              >
+                Add to Cart
+              </button>
 
-            {/* Delivery Info */}
-            <div>
-              <h2 className="text-xl font-heading font-semibold text-chisco-ink mb-4">
-                Delivery Information
-              </h2>
-              <div className="bg-gray-50 rounded-lg p-4">
-                <ul className="space-y-2 text-gray-700">
-                  <li>• Delivery times vary by location and product availability</li>
-                  <li>• Bulk orders may require special arrangements</li>
-                  <li>• All deliveries are arranged via WhatsApp after order confirmation</li>
-                  <li>• Please specify preferred delivery date and time during checkout</li>
-                </ul>
-              </div>
+              <Link
+                href="/products"
+                className="inline-block text-gray-700 hover:text-chisco-navy font-medium"
+              >
+                 Back to Products
+              </Link>
             </div>
           </div>
         </div>

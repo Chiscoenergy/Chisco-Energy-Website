@@ -31,19 +31,22 @@ export const useCartStore = create<CartState>()(
                 ? {
                     ...item,
                     qty: item.qty + quantity,
-                    lineTotal: (item.qty + quantity) * item.price,
+                    lineTotal: (item.qty + quantity) * (item.price ?? 0),
+                    packSize: product.packSize, // Update packSize in case it changed
                   }
                 : item
             ),
           });
         } else {
           // Add new item
+          const price = (product as any)?.price ?? 0;
           const newItem: CartItem = {
             productId: product.id,
             title: product.title,
-            price: product.price,
+            packSize: product.packSize,
+            price,
             qty: quantity,
-            lineTotal: product.price * quantity,
+            lineTotal: price * quantity,
           };
           set({ items: [...items, newItem] });
         }
@@ -67,7 +70,7 @@ export const useCartStore = create<CartState>()(
               ? {
                   ...item,
                   qty: quantity,
-                  lineTotal: quantity * item.price,
+                  lineTotal: quantity * (item.price ?? 0),
                 }
               : item
           ),

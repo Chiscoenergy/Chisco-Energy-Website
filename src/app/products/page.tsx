@@ -1,9 +1,9 @@
 'use client';
 
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import Image from 'next/image';
-import { products } from '@/data/products';
 import { Product } from '@/types/product';
 import { useCartStore } from '@/lib/cart';
 
@@ -11,39 +11,73 @@ export default function ProductsPage() {
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('all');
   const [sortBy, setSortBy] = useState('name');
+  const [products, setProducts] = useState<Product[]>([]);
+  const [loading, setLoading] = useState(true);
   const { addItem } = useCartStore();
+  const router = useRouter();
+
+  useEffect(() => {
+    fetchProducts();
+  }, []);
+
+  const fetchProducts = async () => {
+    try {
+      const response = await fetch('/api/products?limit=1000');
+      if (response.ok) {
+        const data = await response.json();
+        setProducts(data.products || []);
+      } else {
+        console.error('Failed to fetch products');
+      }
+    } catch (error) {
+      console.error('Error fetching products:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   // Get unique categories from products
   const categories = useMemo(() => {
     const cats = new Set(products.flatMap((product: Product) => product.tags || []));
     return ['all', ...Array.from(cats)];
-  }, []);
+  }, [products]);
 
   // Filter and sort products
   const filteredProducts = useMemo(() => {
-    const filtered = products.filter((product: Product) => {
-      const matchesSearch = product.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        product.excerpt?.toLowerCase().includes(searchQuery.toLowerCase());
-      const matchesCategory = selectedCategory === 'all' ||
-        product.tags?.includes(selectedCategory);
-      return matchesSearch && matchesCategory;
-    });
+    // Temporarily bypass filtering to debug
+    let filtered = [...products]; // Start with all products
 
-    // Sort products
+    // Apply search filter
+    if (searchQuery) {
+      const searchLower = searchQuery.toLowerCase();
+      // Only search by product title (name)
+      filtered = filtered.filter((product: Product) =>
+        product.title.toLowerCase().includes(searchLower)
+      );
+    }
+
+    // Apply category filter
+    if (selectedCategory !== 'all') {
+      filtered = filtered.filter((product: Product) =>
+        product.tags?.includes(selectedCategory)
+      );
+    }
+
+    // Sort products - reverse order (newest first, then reverse alphabetical)
     filtered.sort((a: Product, b: Product) => {
       switch (sortBy) {
+        // price sorting removed — fallback to reverse name order
         case 'price-low':
-          return a.price - b.price;
         case 'price-high':
-          return b.price - a.price;
+          return b.title.localeCompare(a.title);
         case 'name':
         default:
-          return a.title.localeCompare(b.title);
+          return b.title.localeCompare(a.title);
       }
     });
 
     return filtered;
-  }, [searchQuery, selectedCategory, sortBy]);
+  }, [products, searchQuery, selectedCategory, sortBy]);
 
   const handleAddToCart = (product: Product) => {
     addItem(product);
@@ -130,8 +164,7 @@ export default function ProductsPage() {
                   className="w-full px-4 py-4 rounded-2xl border border-white/30 bg-white/20 backdrop-blur-sm focus:ring-2 focus:ring-chisco-petrol focus:border-transparent transition-all duration-300 appearance-none shadow-lg text-chisco-navy"
                 >
                   <option value="name">Name (A-Z)</option>
-                  <option value="price-low">Price: Low to High</option>
-                  <option value="price-high">Price: High to Low</option>
+                  {/* Price sorting removed — keep only name sort */}
                 </select>
               </div>
             </div>
@@ -141,7 +174,21 @@ export default function ProductsPage() {
 
       {/* Products Grid */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        {filteredProducts.length === 0 ? (
+        {loading ? (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+            {Array.from({ length: 8 }).map((_, index) => (
+              <div key={index} className="bg-white rounded-xl shadow-sm p-4 animate-pulse">
+                <div className="w-full h-48 bg-gray-200 rounded-lg mb-4"></div>
+                <div className="h-4 bg-gray-200 rounded mb-2"></div>
+                <div className="h-4 bg-gray-200 rounded w-3/4 mb-4"></div>
+                <div className="flex justify-between items-center">
+                  <div className="h-6 bg-gray-200 rounded w-20"></div>
+                  <div className="h-8 bg-gray-200 rounded w-16"></div>
+                </div>
+              </div>
+            ))}
+          </div>
+        ) : filteredProducts.length === 0 ? (
           <div className="text-center py-20">
             <div className="w-24 h-24 bg-white/10 backdrop-blur-xl rounded-3xl flex items-center justify-center mx-auto mb-8 shadow-2xl border border-white/20">
               <svg className="w-12 h-12 text-chisco-petrol" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -183,9 +230,16 @@ export default function ProductsPage() {
               </div>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
               {filteredProducts.map((product: Product) => (
-                <article key={product.id} className="group bg-white/10 backdrop-blur-xl rounded-3xl shadow-2xl hover:shadow-3xl hover:shadow-chisco-petrol/20 transition-all duration-500 transform hover:-translate-y-3 border border-white/20 overflow-hidden relative">
+                <article
+                  key={product.id}
+                  role="button"
+                  tabIndex={0}
+                  onClick={() => router.push(`/products/${product.slug}`)}
+                  onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') router.push(`/products/${product.slug}`); }}
+                  className="group cursor-pointer bg-white/10 backdrop-blur-xl rounded-3xl shadow-2xl hover:shadow-3xl hover:shadow-chisco-petrol/20 transition-all duration-500 transform hover:-translate-y-3 border border-white/20 overflow-hidden relative"
+                >
                   {/* Glass effect overlay */}
                   <div className="absolute inset-0 bg-gradient-to-br from-white/20 via-transparent to-white/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-3xl"></div>
 
@@ -196,7 +250,7 @@ export default function ProductsPage() {
                       alt={product.title}
                       fill
                       className="object-cover group-hover:scale-105 transition-transform duration-500"
-                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
+                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, (min-width:1200px) 20vw"
                     />
                     {product.availability === 'out-of-stock' && (
                       <div className="absolute inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center rounded-t-3xl">
@@ -213,24 +267,22 @@ export default function ProductsPage() {
                   </div>
 
                   {/* Product Info */}
-                  <div className="p-6 relative z-10">
+                  <div className="p-6 lg:p-4 xl:p-5 relative z-10">
                     <div className="mb-4">
-                      <h3 className="font-heading text-xl font-bold text-chisco-navy mb-2 line-clamp-2 group-hover:text-chisco-petrol transition-colors duration-300">
+                      <h3 className="font-heading text-xl lg:text-lg font-bold text-chisco-navy mb-2 line-clamp-2 group-hover:text-chisco-petrol transition-colors duration-300">
                         {product.title}
                       </h3>
-                      <p className="text-chisco-steel text-sm leading-relaxed line-clamp-2">
-                        {product.excerpt}
-                      </p>
+                      {/* description/excerpt removed from product model */}
                     </div>
 
                     <div className="flex items-center justify-between mb-4">
-                      <span className="text-2xl font-bold font-heading text-chisco-navy">
-                        ₦{product.price.toLocaleString()}
+                      <span className="text-2xl lg:text-lg font-bold font-heading text-chisco-navy">
+                        {product.packSize ?? ""}
                       </span>
                       {product.tags && product.tags.length > 0 && (
                         <div className="flex gap-1">
                           {product.tags.slice(0, 2).map((tag: string) => (
-                            <span key={tag} className="text-xs bg-chisco-petrol/10 text-chisco-petrol px-3 py-1 rounded-2xl border border-chisco-petrol/20">
+                            <span key={tag} className="text-xs bg-chisco-petrol/10 text-chisco-petrol px-2 py-0.5 lg:px-2 lg:py-0.5 rounded-2xl border border-chisco-petrol/20">
                               {tag}
                             </span>
                           ))}
@@ -238,22 +290,12 @@ export default function ProductsPage() {
                       )}
                     </div>
 
-                    {/* Actions */}
+                    {/* Actions - only Add to Cart. stopPropagation so clicking the button doesn't trigger card navigation */}
                     <div className="flex gap-3">
-                      <Link
-                        href={`/products/${product.slug}`}
-                        className="flex-1 group/btn inline-flex items-center justify-center px-4 py-3 border-2 border-chisco-petrol text-chisco-petrol font-semibold rounded-2xl hover:bg-chisco-petrol hover:text-white transition-all duration-300 hover:shadow-lg hover:shadow-chisco-petrol/25 transform hover:-translate-y-0.5"
-                      >
-                        <svg className="w-4 h-4 mr-2 group-hover/btn:translate-x-1 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
-                        </svg>
-                        View Details
-                      </Link>
                       <button
-                        onClick={() => handleAddToCart(product)}
+                        onClick={(e) => { e.stopPropagation(); handleAddToCart(product); }}
                         disabled={product.availability === 'out-of-stock'}
-                        className="flex-1 inline-flex items-center justify-center px-4 py-3 bg-gradient-to-r from-chisco-amber to-yellow-400 text-chisco-black font-semibold rounded-2xl hover:shadow-lg hover:shadow-chisco-amber/25 transition-all duration-300 transform hover:-translate-y-0.5 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none shadow-lg"
+                        className="flex-1 inline-flex items-center justify-center px-4 py-3 lg:px-3 lg:py-2 bg-gradient-to-r from-chisco-amber to-yellow-400 text-chisco-black font-semibold rounded-2xl hover:shadow-lg hover:shadow-chisco-amber/25 transition-all duration-300 transform hover:-translate-y-0.5 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none shadow-lg"
                       >
                         <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24">
                           <path strokeLinecap="round" strokeLinejoin="round" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />

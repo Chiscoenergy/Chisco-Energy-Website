@@ -78,7 +78,7 @@ export default function CartDrawer({ isOpen, onClose }: CartDrawerProps) {
 
                     <div className="flex-1 min-w-0">
                       <h3 className="font-medium text-chisco-ink truncate">{item.title}</h3>
-                      <p className="text-sm text-chisco-steel">₦{item.price.toLocaleString()} each</p>
+                      <p className="text-sm text-chisco-steel">{item.price !== undefined ? `₦${item.price.toLocaleString()} each` : ''}</p>
                     </div>
 
                     <div className="flex items-center space-x-2">
@@ -100,7 +100,7 @@ export default function CartDrawer({ isOpen, onClose }: CartDrawerProps) {
                     </div>
 
                     <div className="text-right">
-                      <p className="font-semibold text-chisco-navy">₦{item.lineTotal.toLocaleString()}</p>
+                      <p className="font-semibold text-chisco-navy">{item.lineTotal !== undefined ? `₦${item.lineTotal.toLocaleString()}` : ''}</p>
                       <button
                         onClick={() => removeItem(item.productId)}
                         className="text-xs text-danger hover:text-danger/80 mt-1"

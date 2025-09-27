@@ -1,35 +1,53 @@
 import { GoogleGenerativeAI } from "@google/generative-ai";
 
-const API_KEY = process.env.GEMINI_API_KEY;
-const genAI = new GoogleGenerativeAI(API_KEY!);
+// Use the actual API key from your .env.local
+const API_KEY = process.env.GEMINI_API_KEY || "AIzaSyBUJX9M0K4UE8S_tNd2hvDqvSr2RL2PgIw";
 
-const model = genAI.getGenerativeModel({
-  model: "gemini-1.5-flash",
-  systemInstruction: `You are ChiscoBot, an AI assistant for Chisco Energy, a leading petroleum products company in Nigeria. You help customers with information about our services, products, and general inquiries.
+let genAI: GoogleGenerativeAI;
+let model: any;
+
+try {
+  console.log('🔑 Initializing Gemini with API key:', !!API_KEY);
+  console.log('🔑 API Key length:', API_KEY?.length);
+  
+  genAI = new GoogleGenerativeAI(API_KEY);
+  model = genAI.getGenerativeModel({
+    model: "gemini-1.5-flash",
+    systemInstruction: `You are ChiscoBot, an AI assistant for Chisco Energy, a leading petroleum products company in Nigeria. You help customers with information about our services, products, and general inquiries.
 
 Key information about Chisco Energy:
-- We are a petroleum products company based in Nigeria
-- We provide fuel products including diesel, petrol, kerosene, and lubricants
-- Services include bulk storage, gas distribution, haulage, and retail fuel stations
-- We serve both individual customers and businesses
-- All orders are processed via WhatsApp for efficient communication
+- Leading petroleum products company based in Nigeria
+- Products: Diesel fuel, Petrol (gasoline), Kerosene, Lubricants/Motor oils, Gas products
+- Services: Bulk storage facilities, Gas distribution, Haulage/transportation, Retail fuel stations, Lube oil services
+- We serve individual customers, businesses, and industrial clients
+- Contact: WhatsApp +234 823 636 570
+- All orders and quotes are processed via WhatsApp for efficient communication
+
+Our Product Range:
+- AGO (Automotive Gas Oil/Diesel) - for vehicles, generators, industrial use
+- PMS (Premium Motor Spirit/Petrol) - for vehicles and small engines  
+- DPK (Dual Purpose Kerosene) - for household and industrial use
+- Lubricants - Various motor oils like 20W50, SAE 40 for different engines
+- Gas products - LPG for cooking and industrial applications
 
 Guidelines:
 - Be friendly, professional, and helpful
-- Provide accurate information about petroleum products and services
-- For orders, direct customers to use the website's order system or WhatsApp
-- If you don't know something specific, suggest contacting customer service
+- Provide accurate information about petroleum products and their uses
+- For pricing: Explain that prices vary by product, quantity, and current market rates
+- For orders: Direct to website ordering system or WhatsApp +234 823 636 570
+- For delivery: Mention we provide delivery services, arrangements made via WhatsApp
 - Keep responses concise but informative
-- Use Nigerian context where appropriate (currency in Naira, local references)
+- Use Nigerian context (prices in Naira, local references)
 
-If customers ask about:
-- Pricing: Explain that prices vary by product and quantity, suggest contacting for quote
-- Delivery: Mention that delivery arrangements are made via WhatsApp
-- Products: Provide general information about fuel types and uses
-- Services: Explain our core services (bulk storage, gas, haulage, lube-oil, retail)
+Always offer to connect them with our team via WhatsApp for specific quotes and orders.`,
+  });
+  
+  console.log('✅ Gemini model initialized successfully');
+} catch (error) {
+  console.error('❌ Failed to initialize Gemini:', error);
+}
 
-Always end responses by offering further assistance.`,
-});
+
 
 export interface ChatMessage {
   id: string;
@@ -39,41 +57,86 @@ export interface ChatMessage {
 }
 
 export class GeminiChatService {
-  private chat: ReturnType<typeof model.startChat> | null = null;
+  private chat: any = null;
 
   async initializeChat() {
-    if (!this.chat) {
-      this.chat = model.startChat({
-        history: [
-          {
-            role: "user",
-            parts: [
-              { text: "Hello, I need help with Chisco Energy services." },
-            ],
-          },
-          {
-            role: "model",
-            parts: [
-              {
-                text: "Hello! I'm ChiscoBot, your AI assistant for Chisco Energy. I'm here to help you with information about our petroleum products and services. How can I assist you today?",
-              },
-            ],
-          },
-        ],
-      });
+    try {
+      if (!model) {
+        throw new Error('Gemini model not initialized');
+      }
+      
+      if (!this.chat) {
+        console.log('🚀 Creating new chat session...');
+        this.chat = model.startChat({
+          history: [
+            {
+              role: "user",
+              parts: [
+                { text: "Hello, I need help with Chisco Energy services." },
+              ],
+            },
+            {
+              role: "model",
+              parts: [
+                {
+                  text: "Hello! I'm ChiscoBot, your AI assistant for Chisco Energy. I'm here to help you with information about our petroleum products and services. How can I assist you today?",
+                },
+              ],
+            },
+          ],
+        });
+        console.log('✅ Chat session created');
+      }
+      return this.chat;
+    } catch (error) {
+      console.error('❌ Error initializing chat:', error);
+      throw error;
     }
-    return this.chat;
   }
 
   async sendMessage(message: string): Promise<string> {
     try {
+      console.log('🤖 Gemini sendMessage called with:', message);
+      
+      if (!API_KEY) {
+        console.error('❌ No API key available');
+        throw new Error('Gemini API key not configured');
+      }
+      
+      console.log('🔧 Initializing chat...');
       const chat = await this.initializeChat();
+      
+      console.log('📤 Sending message to Gemini...');
       const result = await chat.sendMessage(message);
+      
+      console.log('📥 Getting response...');
       const response = result.response;
-      return response.text();
+      const text = response.text();
+      
+      console.log('✅ Success! Response length:', text.length);
+      return text;
     } catch (error) {
-      console.error("Gemini API error:", error);
-      return "I apologize, but I'm having trouble connecting right now. Please try again later or contact our customer service team directly via WhatsApp.";
+      console.error("❌ Gemini API error:", error);
+      
+      if (error instanceof Error) {
+        console.error("❌ Error name:", error.name);
+        console.error("❌ Error message:", error.message);
+        console.error("❌ Error stack:", error.stack);
+        
+        // Check for specific Google API errors
+        if (error.message.includes('API_KEY') || error.message.includes('INVALID_ARGUMENT')) {
+          throw new Error(`API Key issue: ${error.message}`);
+        }
+        if (error.message.includes('quota') || error.message.includes('RESOURCE_EXHAUSTED')) {
+          throw new Error(`Quota exceeded: ${error.message}`);
+        }
+        if (error.message.includes('PERMISSION_DENIED')) {
+          throw new Error(`Permission denied - check API key permissions: ${error.message}`);
+        }
+        throw new Error(`Gemini API error: ${error.message}`);
+      }
+      
+      throw new Error(`Unknown error: ${String(error)}`);
     }
   }
 

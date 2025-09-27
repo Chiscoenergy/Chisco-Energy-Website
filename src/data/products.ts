@@ -1,4 +1,5 @@
-import productsData from "./products.json";
 import { Product } from "@/types/product";
 
-export const products: Product[] = productsData as Product[];
+// This file is kept for type exports only.
+// Products are now fetched from the database via /api/products
+export const products: Product[] = [];

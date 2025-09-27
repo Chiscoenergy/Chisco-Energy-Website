@@ -1,6 +1,6 @@
 ﻿'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import NavBar from '@/components/NavBar';
 import Hero from '@/components/Hero';
@@ -16,46 +16,31 @@ import CartDrawer from '@/components/CartDrawer';
 import { useCartStore } from '@/lib/cart';
 import { Product } from '@/types/product';
 
-// Mock data - in production this would come from an API
-const mockProducts: Product[] = [
-  {
-    id: '1',
-    slug: 'automotive-gas-oil-ago-20l',
-    title: 'Automotive Gas Oil (AGO) - 20L',
-    excerpt: 'High-quality diesel fuel for automotive and industrial use.',
-    price: 15000,
-    images: [],
-    packSize: '20L',
-    availability: 'in-stock',
-    tags: ['diesel', 'fuel', 'automotive']
-  },
-  {
-    id: '2',
-    slug: 'diesel-fuel-210l',
-    title: 'Diesel Fuel - 210L',
-    excerpt: 'Bulk diesel fuel for industrial and commercial applications.',
-    price: 75000,
-    images: [],
-    packSize: '210L',
-    availability: 'in-stock',
-    tags: ['diesel', 'bulk', 'industrial']
-  },
-  {
-    id: '3',
-    slug: 'lubricants-engine-oil-5l',
-    title: 'Engine Lubricants - 5L',
-    excerpt: 'Premium engine oil for optimal performance and protection.',
-    price: 8000,
-    images: [],
-    packSize: '5L',
-    availability: 'in-stock',
-    tags: ['lubricants', 'oil', 'maintenance']
-  }
-];
-
 export default function Home() {
   const [cartOpen, setCartOpen] = useState(false);
+  const [products, setProducts] = useState<Product[]>([]);
+  const [productsLoading, setProductsLoading] = useState(true);
   const { addItem } = useCartStore();
+
+  useEffect(() => {
+    fetchProducts();
+  }, []);
+
+  const fetchProducts = async () => {
+    try {
+      const response = await fetch('/api/products?limit=6');
+      if (response.ok) {
+        const data = await response.json();
+        setProducts(data.products || []);
+      } else {
+        console.error('Failed to fetch products');
+      }
+    } catch (error) {
+      console.error('Error fetching products:', error);
+    } finally {
+      setProductsLoading(false);
+    }
+  };
 
   const handleAddToCart = (product: Product) => {
     addItem(product);
@@ -308,7 +293,8 @@ export default function Home() {
           </div>
 
           <ProductGrid
-            products={mockProducts}
+            products={products}
+            loading={productsLoading}
             onAddToCart={handleAddToCart}
           />
         </div>

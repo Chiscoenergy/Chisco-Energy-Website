@@ -145,6 +145,8 @@ export default function CareersPage() {
                 href="https://en-gb.facebook.com/people/Chisco-Energy/100016923426526"
                 target="_blank"
                 rel="noopener noreferrer"
+                aria-label="Follow Chisco Energy on Facebook"
+                title="Follow Chisco Energy on Facebook"
                 className="bg-white/10 backdrop-blur-xl rounded-2xl p-4 border border-white/20 hover:bg-white/15 transition-all duration-300 group"
               >
                 <svg className="w-8 h-8 text-chisco-navy group-hover:text-blue-600 transition-colors" fill="currentColor" viewBox="0 0 24 24">
@@ -155,6 +157,8 @@ export default function CareersPage() {
                 href="https://linkedin.com/in/Chisco-energy-nigeria-limited-002754145"
                 target="_blank"
                 rel="noopener noreferrer"
+                aria-label="Follow Chisco Energy on LinkedIn"
+                title="Follow Chisco Energy on LinkedIn"
                 className="bg-white/10 backdrop-blur-xl rounded-2xl p-4 border border-white/20 hover:bg-white/15 transition-all duration-300 group"
               >
                 <svg className="w-8 h-8 text-chisco-navy group-hover:text-blue-700 transition-colors" fill="currentColor" viewBox="0 0 24 24">

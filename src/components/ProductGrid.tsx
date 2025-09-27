@@ -54,7 +54,6 @@ export default function ProductGrid({
         <ProductCard
           key={product.id}
           product={product}
-          onAddToCart={onAddToCart}
           onQuickView={onQuickView}
         />
       ))}

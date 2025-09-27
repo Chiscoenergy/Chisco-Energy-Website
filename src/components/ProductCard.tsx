@@ -1,24 +1,19 @@
-'use client';
+"use client";
 
-import Image from 'next/image';
-import { Product } from '@/types/product';
+import Image from "next/image";
+import { Product } from "@/types/product";
 
 interface ProductCardProps {
   product: Product;
-  onAddToCart?: (product: Product) => void;
   onQuickView?: (product: Product) => void;
 }
 
-export default function ProductCard({ product, onAddToCart, onQuickView }: ProductCardProps) {
-  const handleAddToCart = () => {
-    onAddToCart?.(product);
-  };
-
+export default function ProductCard({ product, onQuickView }: ProductCardProps) {
   const handleQuickView = () => {
     onQuickView?.(product);
   };
 
-  const isInStock = product.availability !== 'out-of-stock';
+  const isInStock = product.availability !== "out-of-stock";
 
   return (
     <article className="bg-white rounded-xl shadow-sm p-4 flex flex-col hover:shadow-md transition-shadow duration-200 group">
@@ -48,7 +43,7 @@ export default function ProductCard({ product, onAddToCart, onQuickView }: Produ
           </div>
         )}
 
-        {product.availability === 'pre-order' && (
+        {product.availability === "pre-order" && (
           <div className="absolute top-2 right-2 bg-chisco-amber text-chisco-black text-xs px-2 py-1 rounded-full font-medium">
             Pre-order
           </div>
@@ -73,44 +68,10 @@ export default function ProductCard({ product, onAddToCart, onQuickView }: Produ
           {product.title}
         </h3>
 
-        {product.excerpt && (
-          <p className="text-sm text-chisco-steel mb-3 line-clamp-2 flex-1">
-            {product.excerpt}
-          </p>
-        )}
-
         {/* Pack Size */}
         {product.packSize && (
-          <div className="text-xs text-chisco-steel mb-2">
-            Pack Size: {product.packSize}
-          </div>
+          <div className="text-xs text-chisco-steel mb-2">Pack Size: {product.packSize}</div>
         )}
-
-        {/* Price and Add to Cart */}
-        <div className="flex items-center justify-between mt-auto">
-          <div className="flex flex-col">
-            <span className="text-xl font-bold text-chisco-navy">
-              ₦{product.price.toLocaleString()}
-            </span>
-            {product.packSize && (
-              <span className="text-xs text-chisco-steel">
-                per {product.packSize}
-              </span>
-            )}
-          </div>
-
-          <button
-            onClick={handleAddToCart}
-            disabled={!isInStock}
-            className="inline-flex items-center px-4 py-2 bg-chisco-amber text-chisco-black font-semibold rounded-lg hover:bg-chisco-amber/90 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
-            aria-label={`Add ${product.title} to cart`}
-          >
-            <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
-            </svg>
-            Add
-          </button>
-        </div>
       </div>
     </article>
   );
