@@ -54,7 +54,7 @@ export class FirebaseProductService {
   ): Promise<string> {
     try {
       // Remove undefined fields to avoid Firestore errors
-      const payload: any = { ...productData };
+      const payload: Record<string, unknown> = { ...productData };
       Object.keys(payload).forEach((k) => {
         if (payload[k] === undefined) delete payload[k];
       });
@@ -96,7 +96,7 @@ export class FirebaseProductService {
   ): Promise<void> {
     try {
       // Remove undefined fields before updating
-      const payload: any = { ...updates };
+      const payload: Record<string, unknown> = { ...updates };
       Object.keys(payload).forEach((k) => {
         if (payload[k] === undefined) delete payload[k];
       });

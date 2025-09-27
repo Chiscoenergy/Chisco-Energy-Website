@@ -6,12 +6,10 @@ export interface WhatsAppOrderData {
   dateTime?: string;
   additionalNotes?: string;
   items: CartItem[];
-  subtotal: number;
 }
 
 export function generateWhatsAppMessage(orderData: WhatsAppOrderData): string {
-  const { fullName, address, dateTime, additionalNotes, items, subtotal } =
-    orderData;
+  const { fullName, address, dateTime, additionalNotes, items } = orderData;
 
   let message = `*🛢️ CHISCO ENERGY - NEW ORDER*
 

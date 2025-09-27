@@ -39,7 +39,7 @@ export const useCartStore = create<CartState>()(
           });
         } else {
           // Add new item
-          const price = (product as any)?.price ?? 0;
+          const price = 0; // Price not used in current implementation
           const newItem: CartItem = {
             productId: product.id,
             title: product.title,

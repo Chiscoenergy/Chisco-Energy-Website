@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import { useParams, useRouter } from 'next/navigation';
 import Link from 'next/link';
+import { Product } from '@/types/product';
 
 interface ProductForm {
   title: string;
@@ -20,7 +21,7 @@ export default function EditProductPage() {
   const [isLoading, setIsLoading] = useState(true);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
-  const [product, setProduct] = useState<any>(null);
+  const [product, setProduct] = useState<Product | null>(null);
   const [formData, setFormData] = useState<ProductForm>({
     title: '',
     packSize: '',

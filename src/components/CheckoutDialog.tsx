@@ -37,8 +37,7 @@ export default function CheckoutDialog({ isOpen, onClose, onSuccess }: CheckoutD
     try {
       const orderData = {
         ...data,
-        items,
-        subtotal
+        items
       };
 
       const message = generateWhatsAppMessage(orderData);

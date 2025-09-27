@@ -5,7 +5,7 @@ const API_KEY =
   process.env.GEMINI_API_KEY || "AIzaSyBUJX9M0K4UE8S_tNd2hvDqvSr2RL2PgIw";
 
 let genAI: GoogleGenerativeAI;
-let model: any;
+let model: ReturnType<GoogleGenerativeAI['getGenerativeModel']>;
 
 try {
   console.log("🔑 Initializing Gemini with API key:", !!API_KEY);
@@ -56,7 +56,7 @@ export interface ChatMessage {
 }
 
 export class GeminiChatService {
-  private chat: any = null;
+  private chat: ReturnType<typeof model.startChat> | null = null;
 
   async initializeChat() {
     try {

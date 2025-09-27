@@ -52,7 +52,7 @@ export default function NewProductPage() {
     setFormData(prev => ({
       ...prev,
       [name]: value
-    } as any));
+    } as ProductForm));
   };
 
   const handleAddTag = (e: React.KeyboardEvent) => {

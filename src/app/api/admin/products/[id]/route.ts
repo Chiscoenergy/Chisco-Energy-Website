@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { productService } from "@/lib/firebase-products";
+import { Product } from "@/types/product";
 
 export async function GET(
   request: NextRequest,
@@ -40,10 +41,9 @@ export async function PUT(
           .filter((tag) => tag.length > 0)
       : [];
 
-    const updates: any = {
+    const updates: Record<string, unknown> = {
       title: formData.get("title") as string,
       packSize: formData.get("packSize") as string,
-      sku: (formData.get("sku") as string) || undefined,
       availability: formData.get("availability") as "in-stock" | "out-of-stock",
       tags: tags,
     };
