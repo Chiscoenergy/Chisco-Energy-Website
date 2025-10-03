@@ -48,9 +48,25 @@ export async function PUT(
       tags: tags,
     };
 
-    // Handle new image uploads if any
-    const newImages = formData.getAll("newImages") as File[];
+    // Handle image uploads if any
+    const newImages = formData.getAll("images") as File[];
     if (newImages.length > 0) {
+      // Get current product to handle existing images
+      const products = await productService.getProducts();
+      const currentProduct = products.find((p) => p.id === id);
+
+      // Delete old images from storage before uploading new ones
+      if (currentProduct && currentProduct.images) {
+        for (const imageUrl of currentProduct.images) {
+          try {
+            await productService.deleteImage(imageUrl);
+          } catch (imageError) {
+            console.warn("Failed to delete old image:", imageUrl, imageError);
+          }
+        }
+      }
+
+      // Upload new images
       const imageUrls: string[] = [];
       for (const file of newImages) {
         if (file.size > 0) {
@@ -59,13 +75,8 @@ export async function PUT(
         }
       }
 
-      // Get current product to merge images
-      const products = await productService.getProducts();
-      const currentProduct = products.find((p) => p.id === id);
-
-      if (currentProduct) {
-        updates.images = [...(currentProduct.images || []), ...imageUrls];
-      }
+      // Replace images with new ones
+      updates.images = imageUrls;
     }
 
     await productService.updateProduct(id, updates);

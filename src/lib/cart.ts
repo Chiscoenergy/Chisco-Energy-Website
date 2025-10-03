@@ -9,7 +9,6 @@ interface CartState {
   updateQuantity: (productId: string, quantity: number) => void;
   clearCart: () => void;
   getTotalItems: () => number;
-  getTotalPrice: () => number;
 }
 
 export const useCartStore = create<CartState>()(
@@ -31,7 +30,6 @@ export const useCartStore = create<CartState>()(
                 ? {
                     ...item,
                     qty: item.qty + quantity,
-                    lineTotal: (item.qty + quantity) * (item.price ?? 0),
                     packSize: product.packSize, // Update packSize in case it changed
                   }
                 : item
@@ -39,14 +37,11 @@ export const useCartStore = create<CartState>()(
           });
         } else {
           // Add new item
-          const price = 0; // Price not used in current implementation
           const newItem: CartItem = {
             productId: product.id,
             title: product.title,
             packSize: product.packSize,
-            price,
             qty: quantity,
-            lineTotal: price * quantity,
           };
           set({ items: [...items, newItem] });
         }
@@ -70,7 +65,6 @@ export const useCartStore = create<CartState>()(
               ? {
                   ...item,
                   qty: quantity,
-                  lineTotal: quantity * (item.price ?? 0),
                 }
               : item
           ),
@@ -83,10 +77,6 @@ export const useCartStore = create<CartState>()(
 
       getTotalItems: () => {
         return get().items.reduce((total, item) => total + item.qty, 0);
-      },
-
-      getTotalPrice: () => {
-        return get().items.reduce((total, item) => total + item.lineTotal, 0);
       },
     }),
     {

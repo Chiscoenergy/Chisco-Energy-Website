@@ -22,7 +22,8 @@ export default function ProductsPage() {
 
   const fetchProducts = async () => {
     try {
-      const response = await fetch('/api/products?limit=1000');
+      // Fetch a very large limit to ensure we get all products
+      const response = await fetch('/api/products?limit=10000');
       if (response.ok) {
         const data = await response.json();
         setProducts(data.products || []);

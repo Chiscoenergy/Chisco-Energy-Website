@@ -10,11 +10,10 @@ interface CartDrawerProps {
 }
 
 export default function CartDrawer({ isOpen, onClose }: CartDrawerProps) {
-  const { items, updateQuantity, removeItem, getTotalPrice, clearCart } = useCartStore();
+  const { items, updateQuantity, removeItem, clearCart } = useCartStore();
   const [showCheckout, setShowCheckout] = useState(false);
 
-  const totalPrice = getTotalPrice();
-  const shippingEstimate = totalPrice > 100000 ? 'Free delivery' : 'Shipping to be arranged via WhatsApp';
+  const shippingEstimate = 'Shipping to be arranged via WhatsApp';
 
   const handleQuantityChange = (productId: string, newQuantity: number) => {
     if (newQuantity <= 0) {
@@ -78,7 +77,7 @@ export default function CartDrawer({ isOpen, onClose }: CartDrawerProps) {
 
                     <div className="flex-1 min-w-0">
                       <h3 className="font-medium text-chisco-ink truncate">{item.title}</h3>
-                      <p className="text-sm text-chisco-steel">{item.price !== undefined ? `₦${item.price.toLocaleString()} each` : ''}</p>
+                      {item.packSize && <p className="text-sm text-chisco-steel">{item.packSize}</p>}
                     </div>
 
                     <div className="flex items-center space-x-2">
@@ -100,10 +99,9 @@ export default function CartDrawer({ isOpen, onClose }: CartDrawerProps) {
                     </div>
 
                     <div className="text-right">
-                      <p className="font-semibold text-chisco-navy">{item.lineTotal !== undefined ? `₦${item.lineTotal.toLocaleString()}` : ''}</p>
                       <button
                         onClick={() => removeItem(item.productId)}
-                        className="text-xs text-danger hover:text-danger/80 mt-1"
+                        className="text-xs text-danger hover:text-danger/80"
                         aria-label="Remove item"
                       >
                         Remove
@@ -121,16 +119,8 @@ export default function CartDrawer({ isOpen, onClose }: CartDrawerProps) {
               {/* Cart Summary */}
               <div className="space-y-2">
                 <div className="flex justify-between text-sm">
-                  <span className="text-chisco-steel">Subtotal:</span>
-                  <span className="font-medium">₦{totalPrice.toLocaleString()}</span>
-                </div>
-                <div className="flex justify-between text-sm">
                   <span className="text-chisco-steel">Shipping:</span>
                   <span className="font-medium">{shippingEstimate}</span>
-                </div>
-                <div className="flex justify-between text-lg font-semibold border-t pt-2">
-                  <span>Total:</span>
-                  <span>₦{totalPrice.toLocaleString()}</span>
                 </div>
               </div>
 

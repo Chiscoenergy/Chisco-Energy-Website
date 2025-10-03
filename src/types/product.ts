@@ -13,7 +13,5 @@ export type CartItem = {
   productId: string;
   title: string;
   packSize?: string;
-  price?: number;
   qty: number;
-  lineTotal: number; // price * qty
 };

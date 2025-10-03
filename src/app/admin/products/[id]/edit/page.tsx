@@ -13,6 +13,11 @@ interface ProductForm {
   images: File[];
 }
 
+interface ImagePreview {
+  file: File;
+  url: string;
+}
+
 export default function EditProductPage() {
   const params = useParams();
   const router = useRouter();
@@ -22,6 +27,7 @@ export default function EditProductPage() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
   const [product, setProduct] = useState<Product | null>(null);
+  const [imagePreviews, setImagePreviews] = useState<ImagePreview[]>([]);
   const [formData, setFormData] = useState<ProductForm>({
     title: '',
     packSize: '',
@@ -39,6 +45,15 @@ export default function EditProductPage() {
       loadProduct();
     }
   }, [isAuthenticated, productId]);
+
+  // Cleanup image preview URLs when component unmounts
+  useEffect(() => {
+    return () => {
+      imagePreviews.forEach(preview => {
+        URL.revokeObjectURL(preview.url);
+      });
+    };
+  }, [imagePreviews]);
 
   const checkAuth = async () => {
     try {
@@ -97,10 +112,18 @@ export default function EditProductPage() {
 
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files) {
+      const files = Array.from(e.target.files);
       setFormData(prev => ({
         ...prev,
-        images: Array.from(e.target.files || [])
+        images: files
       }));
+
+      // Create preview URLs for selected images
+      const previews: ImagePreview[] = files.map(file => ({
+        file,
+        url: URL.createObjectURL(file)
+      }));
+      setImagePreviews(previews);
     }
   };
 
@@ -129,7 +152,8 @@ export default function EditProductPage() {
 
       if (response.ok) {
         alert('Product updated successfully!');
-        router.push('/admin/products');
+        // Force page refresh to clear any cached images
+        window.location.href = '/admin/products';
       } else {
         const error = await response.text();
         alert(`Error updating product: ${error}`);
@@ -204,7 +228,7 @@ export default function EditProductPage() {
           </h2>
 
           {/* Current Images */}
-          {product.images && product.images.length > 0 && (
+          {product.images && product.images.length > 0 && imagePreviews.length === 0 && (
             <div className="mb-6">
               <h3 className="text-lg font-medium text-gray-900 mb-3">Current Images</h3>
               <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
@@ -215,6 +239,29 @@ export default function EditProductPage() {
                       alt={`${product.title} ${index + 1}`}
                       className="w-full h-32 object-cover rounded border"
                     />
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {/* New Image Previews */}
+          {imagePreviews.length > 0 && (
+            <div className="mb-6">
+              <h3 className="text-lg font-medium text-gray-900 mb-3">
+                New Images Preview (will replace current images)
+              </h3>
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                {imagePreviews.map((preview, index) => (
+                  <div key={index} className="relative">
+                    <img
+                      src={preview.url}
+                      alt={`New image ${index + 1}`}
+                      className="w-full h-32 object-cover rounded border"
+                    />
+                    <div className="absolute top-1 right-1 bg-green-500 text-white text-xs px-1 py-0.5 rounded">
+                      New
+                    </div>
                   </div>
                 ))}
               </div>
@@ -300,6 +347,21 @@ export default function EditProductPage() {
               <p className="text-sm text-gray-500 mt-1">
                 Leave empty to keep current images. Select new images to replace all existing ones.
               </p>
+              {imagePreviews.length > 0 && (
+                <button
+                  type="button"
+                  onClick={() => {
+                    setImagePreviews([]);
+                    setFormData(prev => ({ ...prev, images: [] }));
+                    // Reset the file input
+                    const fileInput = document.getElementById('images') as HTMLInputElement;
+                    if (fileInput) fileInput.value = '';
+                  }}
+                  className="mt-2 px-3 py-1 text-sm border border-gray-300 text-gray-700 rounded hover:bg-gray-50 transition-colors"
+                >
+                  Clear Selected Images
+                </button>
+              )}
             </div>
 
             <div className="flex justify-end space-x-4">

@@ -16,6 +16,20 @@ export default function AdminProductsPage() {
     checkAuth();
   }, []);
 
+  // Refresh products when page becomes visible (e.g., returning from edit page)
+  useEffect(() => {
+    const handleVisibilityChange = () => {
+      if (!document.hidden && isAuthenticated) {
+        loadProducts();
+      }
+    };
+
+    document.addEventListener('visibilitychange', handleVisibilityChange);
+    return () => {
+      document.removeEventListener('visibilitychange', handleVisibilityChange);
+    };
+  }, [isAuthenticated]);
+
   const checkAuth = async () => {
     try {
       const response = await fetch('/api/admin/auth/check');
@@ -165,9 +179,13 @@ export default function AdminProductsPage() {
                   <div className="flex items-start mb-4 space-x-4">
                     <div className="w-24 h-24 flex-shrink-0 rounded-md overflow-hidden bg-gray-50 border">
                       <img
-                        src={product.images && product.images.length > 0 ? product.images[0] : '/file.svg'}
+                        src={product.images && product.images.length > 0
+                          ? `${product.images[0]}?t=${Date.now()}`
+                          : '/file.svg'
+                        }
                         alt={product.title}
                         className="w-full h-full object-cover"
+                        key={`${product.id}-${Date.now()}`}
                       />
                     </div>
 

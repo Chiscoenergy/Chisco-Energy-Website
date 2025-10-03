@@ -22,13 +22,12 @@ export default function ProductDetailPage() {
 
   const fetchProduct = async () => {
     try {
-      const response = await fetch('/api/products');
+      const response = await fetch(`/api/products/by-slug/${slug}`);
       if (response.ok) {
-        const data = await response.json();
-        const foundProduct = data.products?.find((p: Product) => p.slug === slug);
-        setProduct(foundProduct || null);
+        const foundProduct = await response.json();
+        setProduct(foundProduct);
       } else {
-        console.error('Failed to fetch products');
+        console.error('Failed to fetch product');
         setProduct(null);
       }
     } catch (error) {

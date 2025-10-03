@@ -19,7 +19,7 @@ interface CheckoutFormData {
 }
 
 export default function CheckoutDialog({ isOpen, onClose, onSuccess }: CheckoutDialogProps) {
-  const { items, getTotalPrice, clearCart } = useCartStore();
+  const { items, clearCart } = useCartStore();
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const {
@@ -28,8 +28,6 @@ export default function CheckoutDialog({ isOpen, onClose, onSuccess }: CheckoutD
     formState: { errors },
     reset
   } = useForm<CheckoutFormData>();
-
-  const subtotal = getTotalPrice();
 
   const onSubmit = async (data: CheckoutFormData) => {
     setIsSubmitting(true);
@@ -91,17 +89,12 @@ export default function CheckoutDialog({ isOpen, onClose, onSuccess }: CheckoutD
             <h3 className="font-medium text-chisco-ink mb-3">Order Summary</h3>
             <div className="space-y-2">
               {items.map((item) => (
-                <div key={item.productId} className="flex justify-between text-sm">
+                <div key={item.productId} className="text-sm">
                   <span className="text-chisco-steel">
                     {item.title} × {item.qty}
                   </span>
-                  <span className="font-medium">₦{item.lineTotal.toLocaleString()}</span>
                 </div>
               ))}
-              <div className="flex justify-between text-base font-semibold border-t pt-2 mt-3">
-                <span>Total:</span>
-                <span>₦{subtotal.toLocaleString()}</span>
-              </div>
             </div>
           </div>
 
