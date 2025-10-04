@@ -4,7 +4,7 @@ import { GoogleGenerativeAI } from "@google/generative-ai";
 const API_KEY = process.env.GEMINI_API_KEY;
 
 let genAI: GoogleGenerativeAI;
-let model: ReturnType<GoogleGenerativeAI['getGenerativeModel']>;
+let model: ReturnType<GoogleGenerativeAI["getGenerativeModel"]>;
 
 try {
   console.log("🔑 Initializing Gemini with API key:", !!API_KEY);
