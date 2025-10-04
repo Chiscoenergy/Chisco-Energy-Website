@@ -28,14 +28,14 @@ export default function ManagementPage() {
       profileUrl: "/management/fakorede-sunday"
     },
     {
-      name: "Kingsley Uzoaru",
+      name: "Enuma Okoh",
       position: "Head of Human Resources",
-      profileUrl: "/management/kingsley-uzoaru"
+      profileUrl: "/management/enuma-okoh"
     },
     {
-      name: "Lawal Adeyemi",
+      name: "Peter Echezonam",
       position: "Head of Operations & Supply Chain",
-      profileUrl: "/management/lawal-adeyemi"
+      profileUrl: "/management/peter-echezonam"
     },
     {
       name: "Muhammad Kabir",
