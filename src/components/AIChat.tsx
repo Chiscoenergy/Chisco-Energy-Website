@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useRef, useEffect } from 'react';
+import ReactMarkdown from 'react-markdown';
 
 interface Message {
   id: string;
@@ -149,7 +150,29 @@ export default function AIChat({ isOpen, onClose }: AIChatProps) {
                   : 'bg-gray-100 text-gray-800'
                   }`}
               >
-                <p className="text-sm whitespace-pre-wrap">{message.content}</p>
+                {message.role === 'user' ? (
+                  <p className="text-sm whitespace-pre-wrap">{message.content}</p>
+                ) : (
+                  <div className="text-sm prose prose-sm max-w-none prose-headings:text-gray-800 prose-headings:font-semibold prose-headings:mb-2 prose-p:text-gray-800 prose-p:mb-2 prose-strong:text-gray-900 prose-strong:font-semibold prose-ul:text-gray-800 prose-ul:mb-2 prose-ol:text-gray-800 prose-ol:mb-2 prose-li:text-gray-800 prose-li:mb-1 prose-code:text-chisco-navy prose-code:bg-gray-200 prose-code:px-1 prose-code:py-0.5 prose-code:rounded prose-code:text-xs prose-a:text-chisco-petrol prose-a:underline hover:prose-a:text-chisco-navy">
+                    <ReactMarkdown
+                      components={{
+                        h1: ({ children }) => <h1 className="text-base font-semibold text-gray-800 mb-2">{children}</h1>,
+                        h2: ({ children }) => <h2 className="text-sm font-semibold text-gray-800 mb-2">{children}</h2>,
+                        h3: ({ children }) => <h3 className="text-sm font-semibold text-gray-800 mb-1">{children}</h3>,
+                        p: ({ children }) => <p className="text-sm text-gray-800 mb-2 last:mb-0">{children}</p>,
+                        ul: ({ children }) => <ul className="list-disc list-inside text-sm text-gray-800 mb-2 space-y-1">{children}</ul>,
+                        ol: ({ children }) => <ol className="list-decimal list-inside text-sm text-gray-800 mb-2 space-y-1">{children}</ol>,
+                        li: ({ children }) => <li className="text-sm text-gray-800">{children}</li>,
+                        strong: ({ children }) => <strong className="font-semibold text-gray-900">{children}</strong>,
+                        em: ({ children }) => <em className="italic text-gray-800">{children}</em>,
+                        code: ({ children }) => <code className="bg-gray-200 text-chisco-navy px-1 py-0.5 rounded text-xs font-mono">{children}</code>,
+                        a: ({ href, children }) => <a href={href} className="text-chisco-petrol underline hover:text-chisco-navy" target="_blank" rel="noopener noreferrer">{children}</a>,
+                      }}
+                    >
+                      {message.content}
+                    </ReactMarkdown>
+                  </div>
+                )}
                 <p className={`text-xs mt-1 ${message.role === 'user' ? 'text-blue-200' : 'text-gray-500'
                   }`}>
                   {message.timestamp.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
@@ -201,9 +224,6 @@ export default function AIChat({ isOpen, onClose }: AIChatProps) {
               </svg>
             </button>
           </div>
-          <p className="text-xs text-gray-500 mt-2 text-center">
-            Powered by Google Gemini AI
-          </p>
         </div>
       </div>
     </div>

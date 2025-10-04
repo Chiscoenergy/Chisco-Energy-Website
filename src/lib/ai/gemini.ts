@@ -6,6 +6,15 @@ const API_KEY = process.env.GEMINI_API_KEY;
 let genAI: GoogleGenerativeAI;
 let model: ReturnType<GoogleGenerativeAI["getGenerativeModel"]>;
 
+// List of model names to try in order of preference (based on October 2025 Google AI docs)
+const MODEL_NAMES = [
+  "gemini-2.5-flash", // Current best price-performance model (recommended)
+  "gemini-2.5-pro", // Most advanced thinking model
+  "gemini-2.5-flash-lite", // Fastest and most cost-efficient
+  "gemini-2.0-flash", // Previous generation workhorse
+  "gemini-2.0-flash-lite", // Previous generation fast model
+];
+
 try {
   console.log("🔑 Initializing Gemini with API key:", !!API_KEY);
   console.log("🔑 API Key length:", API_KEY?.length);
@@ -15,9 +24,15 @@ try {
   }
 
   genAI = new GoogleGenerativeAI(API_KEY);
-  model = genAI.getGenerativeModel({
-    model: "gemini-1.5-flash",
-    systemInstruction: `You are ChiscoBot, an AI assistant for Chisco Energy, a leading petroleum products company in Nigeria. You help customers with information about our services, products, and general inquiries.
+
+  // Try to initialize with the first available model
+  let modelInitialized = false;
+  for (const modelName of MODEL_NAMES) {
+    try {
+      console.log(`🔍 Trying model: ${modelName}`);
+      model = genAI.getGenerativeModel({
+        model: modelName,
+        systemInstruction: `You are ChiscoBot, an AI assistant for Chisco Energy, a leading petroleum products company in Nigeria. You help customers with information about our services, products, and general inquiries.
 
 Key information about Chisco Energy:
 - Leading petroleum products company based in Nigeria
@@ -44,7 +59,20 @@ Guidelines:
 - Use Nigerian context (prices in Naira, local references)
 
 Always offer to connect them with our team via WhatsApp for specific quotes and orders.`,
-  });
+      });
+
+      console.log(`✅ Successfully initialized model: ${modelName}`);
+      modelInitialized = true;
+      break;
+    } catch (modelError) {
+      console.log(`❌ Failed to initialize ${modelName}:`, modelError);
+      continue;
+    }
+  }
+
+  if (!modelInitialized) {
+    throw new Error("Failed to initialize any Gemini model");
+  }
 
   console.log("✅ Gemini model initialized successfully");
 } catch (error) {
