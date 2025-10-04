@@ -44,7 +44,7 @@ export default function PeterEchezonamPage() {
               </p>
               <p>
                 With a proven track record in operational management and supply chain optimization,
-                Peter plays a pivotal role in maintaining Chisco Energy's reputation for reliability
+                Peter plays a pivotal role in maintaining Chisco Energy&apos;s reputation for reliability
                 and operational efficiency in the competitive energy sector.
               </p>
             </div>
@@ -61,7 +61,7 @@ export default function PeterEchezonamPage() {
 
             <h3 className="text-2xl font-semibold text-chisco-navy mb-4 mt-8">Supply Chain Excellence</h3>
             <p className="text-chisco-steel text-lg leading-relaxed mb-4">
-              Peter's expertise in supply chain management includes:
+              Peter&apos;s expertise in supply chain management includes:
             </p>
             <ul className="text-chisco-steel space-y-2">
               <li>• End-to-end supply chain strategy and planning</li>
@@ -76,7 +76,7 @@ export default function PeterEchezonamPage() {
             <p className="text-chisco-steel text-lg leading-relaxed">
               Peter combines operational excellence with financial acumen in his approach to
               operational management. He integrates financial planning with operational strategies,
-              ensuring that Chisco Energy's operations are not only efficient but also
+              ensuring that Chisco Energy&apos;s operations are not only efficient but also
               financially sustainable and profitable.
             </p>
 
@@ -88,7 +88,7 @@ export default function PeterEchezonamPage() {
             </p>
 
             <p className="text-chisco-steel text-lg leading-relaxed mt-4">
-              Under Peter's guidance, Chisco Energy continues to strengthen its market position through
+              Under Peter&apos;s guidance, Chisco Energy continues to strengthen its market position through
               strategic operational improvements, enhanced supply chain efficiency, and a steadfast
               focus on operational efficiency, supply chain optimization, and team development
               that drives sustainable growth in the energy sector.

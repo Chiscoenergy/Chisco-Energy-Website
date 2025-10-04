@@ -39,13 +39,13 @@ export default function EnumaOkohPage() {
               </p>
               <p>
                 Her leadership ensures that Chisco Energy maintains a skilled, motivated workforce
-                aligned with the company's vision and values, fostering a culture of excellence
+                aligned with the company&apos;s vision and values, fostering a culture of excellence
                 and professional growth across all departments.
               </p>
               <p>
                 With a strong background in human resource management, talent acquisition,
                 and employee development, Enuma plays a crucial role in building and maintaining
-                the human capital that drives Chisco Energy's success.
+                the human capital that drives Chisco Energy&apos;s success.
               </p>
             </div>
 
@@ -61,7 +61,7 @@ export default function EnumaOkohPage() {
 
             <h3 className="text-2xl font-semibold text-chisco-navy mb-4 mt-8">HR Excellence</h3>
             <p className="text-chisco-steel text-lg leading-relaxed mb-4">
-              Enuma's expertise in human resource management includes:
+              Enuma&apos;s expertise in human resource management includes:
             </p>
             <ul className="text-chisco-steel space-y-2">
               <li>• Workforce planning and organizational design</li>
@@ -73,15 +73,15 @@ export default function EnumaOkohPage() {
 
             <h3 className="text-2xl font-semibold text-chisco-navy mb-4 mt-8">Professional Impact</h3>
             <p className="text-chisco-steel text-lg leading-relaxed">
-              Under Enuma's leadership, the Human Resources department has established
+              Under Enuma&apos;s leadership, the Human Resources department has established
               comprehensive talent management systems, enhanced employee satisfaction,
               and created pathways for professional growth within Chisco Energy.
-              Her strategic approach to HR management supports the company's operational
+              Her strategic approach to HR management supports the company&apos;s operational
               excellence and long-term sustainability goals.
             </p>
 
             <p className="text-chisco-steel text-lg leading-relaxed mt-4">
-              Enuma's commitment to fostering an inclusive and high-performance workplace
+              Enuma&apos;s commitment to fostering an inclusive and high-performance workplace
               culture has been instrumental in attracting and retaining top talent,
               ensuring that Chisco Energy continues to build a workforce capable of
               meeting the evolving challenges of the energy sector.
