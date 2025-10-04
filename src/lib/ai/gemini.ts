@@ -1,8 +1,7 @@
 import { GoogleGenerativeAI } from "@google/generative-ai";
 
-// Use the actual API key from your .env.local
-const API_KEY =
-  process.env.GEMINI_API_KEY || "AIzaSyBUJX9M0K4UE8S_tNd2hvDqvSr2RL2PgIw";
+// Get API key from environment variables
+const API_KEY = process.env.GEMINI_API_KEY;
 
 let genAI: GoogleGenerativeAI;
 let model: ReturnType<GoogleGenerativeAI['getGenerativeModel']>;
@@ -10,6 +9,10 @@ let model: ReturnType<GoogleGenerativeAI['getGenerativeModel']>;
 try {
   console.log("🔑 Initializing Gemini with API key:", !!API_KEY);
   console.log("🔑 API Key length:", API_KEY?.length);
+
+  if (!API_KEY) {
+    throw new Error("GEMINI_API_KEY environment variable is not set");
+  }
 
   genAI = new GoogleGenerativeAI(API_KEY);
   model = genAI.getGenerativeModel({
