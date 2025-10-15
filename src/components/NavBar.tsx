@@ -33,6 +33,9 @@ export default function NavBar({ onOpenCart, cartCount = 0 }: NavBarProps) {
         <Link href="/#about" className="text-white hover:text-chisco-amber transition-colors">
           About Us
         </Link>
+        <Link href="/products" className="text-white hover:text-chisco-amber transition-colors">
+          Products
+        </Link>
         <Link href="/management" className="text-white hover:text-chisco-amber transition-colors">
           Management
         </Link>
@@ -112,6 +115,13 @@ export default function NavBar({ onOpenCart, cartCount = 0 }: NavBarProps) {
               onClick={() => setIsMenuOpen(false)}
             >
               Management
+            </Link>
+            <Link
+              href="/products"
+              className="text-white hover:text-chisco-amber transition-colors py-2"
+              onClick={() => setIsMenuOpen(false)}
+            >
+              Products
             </Link>
             <Link
               href="/careers"

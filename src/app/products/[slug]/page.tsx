@@ -142,6 +142,10 @@ export default function ProductDetailPage() {
               <h1 className="text-3xl font-heading font-semibold text-chisco-ink mb-2">
                 {product.title}
               </h1>
+              {/* Price (optional) */}
+              {product.price !== undefined && (
+                <div className="text-2xl text-chisco-amber font-semibold mb-2">₦{Number(product.price).toLocaleString()}</div>
+              )}
             </div>
 
             <div className="flex items-center space-x-4">

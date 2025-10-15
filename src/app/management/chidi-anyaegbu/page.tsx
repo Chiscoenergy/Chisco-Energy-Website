@@ -20,8 +20,7 @@ export default function ChidiAnyaegbuPage() {
               CEO & Chairman
             </p>
             <p className="text-lg text-chisco-steel max-w-3xl mx-auto">
-              A visionary leader with over three decades of experience in the energy sector,
-              driving innovation and sustainable growth across Africa.
+              Chief (Dr) Chidi Anyaegbu (MFR, CON) serves as both the Chairman and Chief Executive of the company, embodying qualities of a transport expert, accomplished business tycoon, philanthropist, and national figure.
             </p>
           </div>
         </div>
@@ -31,48 +30,34 @@ export default function ChidiAnyaegbuPage() {
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         <div className="bg-white/10 backdrop-blur-xl rounded-3xl p-8 md:p-12 border border-white/20 shadow-2xl">
           <div className="prose prose-lg max-w-none">
-            <h2 className="text-3xl font-bold text-chisco-navy mb-6">About Chidi Anyaegbu</h2>
+            <h2 className="text-3xl font-bold text-chisco-navy mb-6">About the Chairman</h2>
 
             <p className="text-chisco-steel mb-6">
-              Chidi Anyaegbu is a seasoned entrepreneur and business leader with over 30 years of
-              experience in the energy sector. As CEO and Chairman of Chisco Energy, he has been
-              instrumental in transforming the company into one of Nigeria&apos;s leading energy
-              distribution companies.
+              Chief (Dr) Chidi Anyaegbu (MFR, CON) serves as both the Chairman and Chief Executive of Chisco Energy. He is widely recognised as a transport expert, accomplished business tycoon, philanthropist and national figure. Over a distinguished career he has made significant contributions to the transport and energy sectors in Nigeria and beyond.
             </p>
 
-            <h3 className="text-2xl font-semibold text-chisco-navy mb-4">Professional Background</h3>
-            <p className="text-chisco-steel mb-6">
-              Chidi holds a Master&apos;s degree in Business Administration and has extensive experience
-              in corporate finance, strategic planning, and business development. His career spans
-              multiple industries including energy, telecommunications, and manufacturing.
-            </p>
-
-            <h3 className="text-2xl font-semibold text-chisco-navy mb-4">Leadership Experience</h3>
+            <h3 className="text-2xl font-semibold text-chisco-navy mb-4">Honours & Awards</h3>
             <ul className="text-chisco-steel mb-6 space-y-2">
-              <li>• CEO and Chairman of Chisco Energy Limited</li>
-              <li>• Former Director of various multinational corporations</li>
-              <li>• Extensive experience in corporate governance and strategic planning</li>
-              <li>• Proven track record in business expansion and market development</li>
+              <li>• Member of the Federal Republic (MFR) — awarded by the Jonathan Administration</li>
+              <li>• Commander of the Order of the Niger (CON) — awarded by the Buhari Administration</li>
+              <li>• Distinguished Fellow, Chartered Institute of Logistics and Transport (International), London</li>
+              <li>• Honorary Fellow, Institute of Internal Auditors of Nigeria</li>
+              <li>• Honorary Doctorate (DBA), Penn State University, USA (1996)</li>
             </ul>
 
-            <h3 className="text-2xl font-semibold text-chisco-navy mb-4">Industry Expertise</h3>
+            <h3 className="text-2xl font-semibold text-chisco-navy mb-4">Contributions & Initiatives</h3>
             <p className="text-chisco-steel mb-6">
-              With deep knowledge of the African energy market, Chidi has successfully navigated
-              complex regulatory environments and market dynamics. His expertise includes:
+              Dr. Anyaegbu&apos;s commitment to advancing transport education led to the establishment of the Faculty of Transport and Logistics Studies at Nnamdi Azikiwe University, Awka. His philanthropic and community efforts have earned him accolades from organisations both within Nigeria and internationally.
             </p>
-            <ul className="text-chisco-steel mb-6 space-y-2">
-              <li>• Energy distribution and retail operations</li>
-              <li>• Strategic partnerships and business development</li>
-              <li>• Regulatory compliance and government relations</li>
-              <li>• Sustainable energy solutions and innovation</li>
-            </ul>
 
-            <h3 className="text-2xl font-semibold text-chisco-navy mb-4">Vision for Chisco Energy</h3>
+            <h3 className="text-2xl font-semibold text-chisco-navy mb-4">International Development & Training</h3>
             <p className="text-chisco-steel mb-6">
-              Under Chidi&apos;s leadership, Chisco Energy continues to expand its footprint across
-              Nigeria, providing reliable energy solutions while contributing to economic
-              development and job creation. His commitment to excellence and innovation drives
-              the company&apos;s mission to be the trusted source for energy solutions.
+              He has broadened his expertise through active participation in management and entrepreneurial programmes around the world, including in France, the United States, Brazil, Germany and the United Kingdom. These global experiences have helped shape his strategic vision and approach to business and industrial development.
+            </p>
+
+            <h3 className="text-2xl font-semibold text-chisco-navy mb-4">Leadership & Vision</h3>
+            <p className="text-chisco-steel mb-6">
+              As Chairman and CEO, Dr. Anyaegbu champions strategic growth, strong governance and community impact. His leadership continues to guide Chisco Energy&apos;s mission to deliver reliable energy solutions while supporting socio-economic development across Nigeria.
             </p>
           </div>
         </div>

@@ -41,12 +41,21 @@ export async function PUT(
           .filter((tag) => tag.length > 0)
       : [];
 
-    const updates: Record<string, string | string[]> = {
+    const updates: Record<string, string | string[] | number> = {
       title: formData.get("title") as string,
       packSize: formData.get("packSize") as string,
       availability: formData.get("availability") as "in-stock" | "out-of-stock",
       tags: tags,
     };
+
+    // price can be optional and numeric — parse and round to 2 decimals to avoid floating point drift
+    if (formData.get("price")) {
+      const raw = String(formData.get("price"));
+      const parsed = parseFloat(raw);
+      if (!isNaN(parsed)) {
+        updates.price = Math.round(parsed * 100) / 100;
+      }
+    }
 
     // Handle image uploads if any
     const newImages = formData.getAll("images") as File[];

@@ -29,6 +29,13 @@ export async function POST(request: NextRequest) {
     const productData = {
       slug: formData.get("slug") as string,
       title: formData.get("title") as string,
+      // parse and round price to 2 decimals to avoid floating point drift
+      price: (() => {
+        const raw = formData.get("price");
+        if (!raw) return undefined;
+        const parsed = parseFloat(String(raw));
+        return isNaN(parsed) ? undefined : Math.round(parsed * 100) / 100;
+      })(),
       packSize: formData.get("packSize") as string,
       sku: (formData.get("sku") as string) || undefined,
       availability: formData.get("availability") as "in-stock" | "out-of-stock",

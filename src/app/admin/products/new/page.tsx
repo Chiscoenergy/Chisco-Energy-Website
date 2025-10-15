@@ -11,6 +11,7 @@ interface ProductForm {
   availability: 'in-stock' | 'out-of-stock';
   tags: string[];
   images: File[];
+  price?: string;
 }
 
 export default function NewProductPage() {
@@ -104,6 +105,7 @@ export default function NewProductPage() {
       // Add basic product data (no price/description/excerpt)
       formDataToSend.append('slug', formData.title.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, ''));
       formDataToSend.append('title', formData.title);
+      if (formData.price) formDataToSend.append('price', formData.price);
       formDataToSend.append('packSize', formData.packSize);
       if (formData.sku) formDataToSend.append('sku', formData.sku);
       formDataToSend.append('availability', formData.availability);
@@ -193,7 +195,20 @@ export default function NewProductPage() {
 
             {/* description/excerpt/price removed from admin add form per product model change */}
             <div>
-
+              <label htmlFor="price" className="block text-sm font-medium text-gray-700 mb-2">
+                Price (Optional)
+              </label>
+              <input
+                type="number"
+                step="0.01"
+                min="0"
+                id="price"
+                name="price"
+                value={formData.price || ''}
+                onChange={handleInputChange}
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-chisco-petrol focus:border-transparent placeholder-chisco-steel text-gray-900"
+                placeholder="e.g., 12000.00"
+              />
             </div>
             {/* Price and Pack Size */}
             <div>

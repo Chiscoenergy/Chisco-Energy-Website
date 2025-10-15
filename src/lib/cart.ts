@@ -41,6 +41,7 @@ export const useCartStore = create<CartState>()(
             productId: product.id,
             title: product.title,
             packSize: product.packSize,
+            price: product.price,
             qty: quantity,
           };
           set({ items: [...items, newItem] });

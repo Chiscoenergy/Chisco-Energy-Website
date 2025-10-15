@@ -11,6 +11,7 @@ interface ProductForm {
   availability: 'in-stock' | 'out-of-stock' | 'pre-order';
   tags: string;
   images: File[];
+  price?: string;
 }
 
 interface ImagePreview {
@@ -34,6 +35,7 @@ export default function EditProductPage() {
     availability: 'in-stock',
     tags: '',
     images: [],
+    price: undefined,
   });
 
   useEffect(() => {
@@ -87,6 +89,10 @@ export default function EditProductPage() {
           packSize: data.product.packSize || '',
           availability: data.product.availability || 'in-stock',
           tags: data.product.tags ? data.product.tags.join(', ') : '',
+          price:
+            data.product.price !== undefined && data.product.price !== null
+              ? Number(data.product.price).toFixed(2)
+              : undefined,
           images: [],
         });
       } else {
@@ -134,6 +140,7 @@ export default function EditProductPage() {
     try {
       const formDataToSend = new FormData();
       formDataToSend.append('title', formData.title);
+      if (formData.price) formDataToSend.append('price', formData.price);
       formDataToSend.append('packSize', formData.packSize);
       formDataToSend.append('availability', formData.availability);
       formDataToSend.append('tags', formData.tags);
@@ -281,6 +288,23 @@ export default function EditProductPage() {
                 onChange={handleInputChange}
                 required
                 className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-chisco-petrol focus:border-transparent text-gray-900 placeholder-gray-500"
+              />
+            </div>
+
+            <div>
+              <label htmlFor="price" className="block text-sm font-medium text-gray-900 mb-2">
+                Price (Optional)
+              </label>
+              <input
+                type="number"
+                step="0.01"
+                min="0"
+                id="price"
+                name="price"
+                value={formData.price || ''}
+                onChange={handleInputChange}
+                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-chisco-petrol focus:border-transparent text-gray-900 placeholder-gray-500"
+                placeholder="e.g., 12000.00"
               />
             </div>
 

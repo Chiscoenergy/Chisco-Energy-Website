@@ -32,7 +32,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${afacad.variable} ${inter.variable} antialiased`}
+        className={`${afacad.variable} ${inter.variable} antialiased overflow-x-hidden`}
       >
         {children}
         <ChatButton />

@@ -280,6 +280,9 @@ export default function ProductsPage() {
                       <span className="text-2xl lg:text-lg font-bold font-heading text-chisco-navy">
                         {product.packSize ?? ""}
                       </span>
+                      {product.price !== undefined && (
+                        <div className="text-2xl lg:text-lg text-chisco-amber font-semibold">₦{Number(product.price).toLocaleString()}</div>
+                      )}
                       {product.tags && product.tags.length > 0 && (
                         <div className="flex gap-1">
                           {product.tags.slice(0, 2).map((tag: string) => (

@@ -72,6 +72,10 @@ export default function ProductCard({ product, onQuickView }: ProductCardProps) 
         {product.packSize && (
           <div className="text-xs text-chisco-steel mb-2">Pack Size: {product.packSize}</div>
         )}
+        {/* Price */}
+        {product.price !== undefined && (
+          <div className="text-lg text-chisco-amber font-semibold mt-2">₦{Number(product.price).toLocaleString()}</div>
+        )}
       </div>
     </article>
   );
