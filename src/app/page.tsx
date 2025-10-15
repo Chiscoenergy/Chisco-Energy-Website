@@ -8,7 +8,6 @@ import Statistics from '@/components/Statistics';
 import Services from '@/components/Services';
 import Testimonials from '@/components/Testimonials';
 import CTASection from '@/components/CTASection';
-import Partners from '@/components/Partners';
 import Newsletter from '@/components/Newsletter';
 import AnimatedSection from '@/components/AnimatedSection';
 import Footer from '@/components/Footer';
@@ -94,10 +93,7 @@ export default function Home() {
         <CTASection />
       </AnimatedSection>
 
-      {/* Partners Section */}
-      <AnimatedSection delay={1.0}>
-        <Partners />
-      </AnimatedSection>
+      {/* Partners Section removed per request */}
 
       {/* About Section */}
       <section id="about" className="py-16 sm:py-20 lg:py-24 px-6 relative overflow-hidden">
@@ -304,55 +300,7 @@ export default function Home() {
       {/* Newsletter Section */}
       <Newsletter />
 
-      {/* Stats Section */}
-      <section className="py-16 sm:py-20 lg:py-24 px-6 bg-chisco-navy relative overflow-hidden">
-        {/* Background Pattern */}
-        <div className="absolute inset-0 opacity-10">
-          <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent"></div>
-        </div>
-
-        <div className="max-w-7xl mx-auto relative">
-          <div className="text-center mb-12 lg:mb-16">
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-heading font-bold text-white mb-4 lg:mb-6">
-              Trusted by Industry Leaders
-            </h2>
-            <p className="text-base sm:text-lg md:text-xl text-white/80 max-w-2xl mx-auto">
-              Decades of reliable service and proven results
-            </p>
-          </div>
-
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
-            <div className="group text-center p-4 lg:p-6 bg-white/10 backdrop-blur-sm rounded-2xl border border-white/20 hover:bg-white/20 transition-all duration-300 transform hover:-translate-y-2">
-              <div className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold font-heading text-white mb-2 lg:mb-3 group-hover:text-chisco-amber transition-colors">
-                15+
-              </div>
-              <div className="text-white/80 font-medium text-sm lg:text-base">Years Experience</div>
-              <div className="w-8 lg:w-12 h-1 bg-chisco-amber rounded-full mx-auto mt-3 lg:mt-4 opacity-0 group-hover:opacity-100 transition-opacity"></div>
-            </div>
-            <div className="group text-center p-4 lg:p-6 bg-white/10 backdrop-blur-sm rounded-2xl border border-white/20 hover:bg-white/20 transition-all duration-300 transform hover:-translate-y-2">
-              <div className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold font-heading text-white mb-2 lg:mb-3 group-hover:text-chisco-amber transition-colors">
-                24/7
-              </div>
-              <div className="text-white/80 font-medium text-sm lg:text-base">Customer Support</div>
-              <div className="w-8 lg:w-12 h-1 bg-chisco-amber rounded-full mx-auto mt-3 lg:mt-4 opacity-0 group-hover:opacity-100 transition-opacity"></div>
-            </div>
-            <div className="group text-center p-4 lg:p-6 bg-white/10 backdrop-blur-sm rounded-2xl border border-white/20 hover:bg-white/20 transition-all duration-300 transform hover:-translate-y-2">
-              <div className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold font-heading text-white mb-2 lg:mb-3 group-hover:text-chisco-amber transition-colors">
-                500+
-              </div>
-              <div className="text-white/80 font-medium text-sm lg:text-base">Happy Clients</div>
-              <div className="w-8 lg:w-12 h-1 bg-chisco-amber rounded-full mx-auto mt-3 lg:mt-4 opacity-0 group-hover:opacity-100 transition-opacity"></div>
-            </div>
-            <div className="group text-center p-4 lg:p-6 bg-white/10 backdrop-blur-sm rounded-2xl border border-white/20 hover:bg-white/20 transition-all duration-300 transform hover:-translate-y-2">
-              <div className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold font-heading text-white mb-2 lg:mb-3 group-hover:text-chisco-amber transition-colors">
-                99%
-              </div>
-              <div className="text-white/80 font-medium text-sm lg:text-base">On-Time Delivery</div>
-              <div className="w-8 lg:w-12 h-1 bg-chisco-amber rounded-full mx-auto mt-3 lg:mt-4 opacity-0 group-hover:opacity-100 transition-opacity"></div>
-            </div>
-          </div>
-        </div>
-      </section>
+      {/* Stats Section removed per request */}
 
       {/* Use shared Footer component so site footers remain consistent */}
       <Footer />
