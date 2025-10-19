@@ -29,6 +29,7 @@ export async function POST(request: NextRequest) {
     const productData = {
       slug: formData.get("slug") as string,
       title: formData.get("title") as string,
+      company: (formData.get("company") as string) || undefined,
       // parse and round price to 2 decimals to avoid floating point drift
       price: (() => {
         const raw = formData.get("price");

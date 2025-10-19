@@ -43,6 +43,7 @@ export async function PUT(
 
     const updates: Record<string, string | string[] | number> = {
       title: formData.get("title") as string,
+      company: formData.get("company") as string,
       packSize: formData.get("packSize") as string,
       availability: formData.get("availability") as "in-stock" | "out-of-stock",
       tags: tags,
