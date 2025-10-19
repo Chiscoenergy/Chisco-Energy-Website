@@ -283,13 +283,11 @@ export default function ProductsPage() {
                       {product.price !== undefined && (
                         <div className="text-2xl lg:text-lg text-chisco-amber font-semibold">₦{Number(product.price).toLocaleString()}</div>
                       )}
-                      {product.tags && product.tags.length > 0 && (
+                      {product.company && (
                         <div className="flex gap-1">
-                          {product.tags.slice(0, 2).map((tag: string) => (
-                            <span key={tag} className="text-xs bg-chisco-petrol/10 text-chisco-petrol px-2 py-0.5 lg:px-2 lg:py-0.5 rounded-2xl border border-chisco-petrol/20">
-                              {tag}
-                            </span>
-                          ))}
+                          <span className="text-xs bg-chisco-petrol/10 text-chisco-petrol px-2 py-0.5 lg:px-2 lg:py-0.5 rounded-2xl border border-chisco-petrol/20">
+                            {product.company}
+                          </span>
                         </div>
                       )}
                     </div>
