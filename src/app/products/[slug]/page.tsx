@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import { useParams } from 'next/navigation';
 import Link from 'next/link';
 import Image from 'next/image';
+import NavBar from '@/components/NavBar';
 import { Product } from '@/types/product';
 import { useCartStore } from '@/lib/cart';
 
@@ -83,6 +84,9 @@ export default function ProductDetailPage() {
 
   return (
     <div className="min-h-screen bg-chisco-surface">
+      {/* Navigation */}
+      <NavBar />
+
       {/* Breadcrumb */}
       <div className="bg-white border-b">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">

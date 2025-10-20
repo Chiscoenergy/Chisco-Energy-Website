@@ -4,6 +4,7 @@ import { useState, useMemo, useEffect } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
+import NavBar from '@/components/NavBar';
 import { Product } from '@/types/product';
 import { useCartStore } from '@/lib/cart';
 
@@ -87,6 +88,9 @@ export default function ProductsPage() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-chisco-surface via-chisco-surface/80 to-chisco-navy/20">
+      {/* Navigation */}
+      <NavBar />
+
       {/* Header */}
       <div className="relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-white/20 via-chisco-surface/30 to-chisco-navy/10 backdrop-blur-xl"></div>

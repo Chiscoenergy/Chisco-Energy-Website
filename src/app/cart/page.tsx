@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
+import NavBar from '@/components/NavBar';
 import CartDrawer from '@/components/CartDrawer';
 import CheckoutDialog from '@/components/CheckoutDialog';
 
@@ -11,6 +12,9 @@ export default function CartPage() {
 
   return (
     <div className="min-h-screen bg-chisco-surface">
+      {/* Navigation */}
+      <NavBar />
+
       {/* Header */}
       <div className="bg-white shadow-sm">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
