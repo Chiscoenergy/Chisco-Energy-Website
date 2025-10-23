@@ -2,6 +2,7 @@ export type Product = {
   id: string;
   slug: string;
   title: string;
+  company?: string; // e.g., "Lube", "LPG", "PMS"
   price?: number;
   images: string[]; // urls
   packSize?: string; // e.g., "20L", "210L"

@@ -61,7 +61,7 @@ Thank you for choosing Chisco Energy! 🚛`;
 
 export function generateWhatsAppUrl(
   message: string,
-  phoneNumber = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || "234823636570"
+  phoneNumber = "2342013303370"
 ): string {
   // Remove + and leading zeros from phone number for wa.me format
   const cleanPhone = phoneNumber.replace(/^\+?0*/, "");

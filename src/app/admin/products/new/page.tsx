@@ -6,6 +6,7 @@ import Link from 'next/link';
 
 interface ProductForm {
   title: string;
+  company?: string;
   packSize: string;
   sku: string;
   availability: 'in-stock' | 'out-of-stock';
@@ -105,6 +106,7 @@ export default function NewProductPage() {
       // Add basic product data (no price/description/excerpt)
       formDataToSend.append('slug', formData.title.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, ''));
       formDataToSend.append('title', formData.title);
+      if (formData.company) formDataToSend.append('company', formData.company);
       if (formData.price) formDataToSend.append('price', formData.price);
       formDataToSend.append('packSize', formData.packSize);
       if (formData.sku) formDataToSend.append('sku', formData.sku);
@@ -190,6 +192,22 @@ export default function NewProductPage() {
                 required
                 className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-chisco-petrol focus:border-transparent placeholder-chisco-steel text-gray-900"
                 placeholder="e.g., Automotive Gas Oil (AGO) - 20L"
+              />
+            </div>
+
+            {/* Company Name */}
+            <div>
+              <label htmlFor="company" className="block text-sm font-medium text-gray-700 mb-2">
+                Company Name (Optional)
+              </label>
+              <input
+                type="text"
+                id="company"
+                name="company"
+                value={formData.company || ''}
+                onChange={handleInputChange}
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-chisco-petrol focus:border-transparent placeholder-chisco-steel text-gray-900"
+                placeholder="e.g., Lube, LPG, PMS"
               />
             </div>
 

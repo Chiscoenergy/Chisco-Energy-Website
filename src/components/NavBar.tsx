@@ -64,7 +64,7 @@ export default function NavBar({ onOpenCart, cartCount = 0 }: NavBarProps) {
           )}
         </button>
         <a
-          href="https://wa.me/2348123456789?text=Hello%20Chisco%20Energy%2C%20I%27d%20like%20to%20inquire%20about%20your%20fuel%20services."
+          href="https://wa.me/2342013303370?text=Hello%20Chisco%20Energy%2C%20I%27d%20like%20to%20inquire%20about%20your%20fuel%20services."
           target="_blank"
           rel="noopener noreferrer"
           className="inline-flex items-center px-4 py-2 bg-chisco-amber text-chisco-black font-semibold rounded-lg hover:bg-chisco-amber/90 transition-colors"
@@ -151,7 +151,7 @@ export default function NavBar({ onOpenCart, cartCount = 0 }: NavBarProps) {
                 Cart {cartCount > 0 && `(${cartCount > 99 ? '99+' : cartCount})`}
               </button>
               <a
-                href="https://wa.me/2348123456789?text=Hello%20Chisco%20Energy%2C%20I%27d%20like%20to%20inquire%20about%20your%20fuel%20services."
+                href="https://wa.me/2342013303370?text=Hello%20Chisco%20Energy%2C%20I%27d%20like%20to%20inquire%20about%20your%20fuel%20services."
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center w-full px-4 py-3 bg-chisco-amber text-chisco-black font-semibold rounded-lg hover:bg-chisco-amber/90 transition-colors mt-4"

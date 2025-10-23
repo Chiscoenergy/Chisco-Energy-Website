@@ -7,6 +7,7 @@ import { Product } from '@/types/product';
 
 interface ProductForm {
   title: string;
+  company?: string;
   packSize: string;
   availability: 'in-stock' | 'out-of-stock' | 'pre-order';
   tags: string;
@@ -86,6 +87,7 @@ export default function EditProductPage() {
         setProduct(data.product);
         setFormData({
           title: data.product.title || '',
+          company: data.product.company || '',
           packSize: data.product.packSize || '',
           availability: data.product.availability || 'in-stock',
           tags: data.product.tags ? data.product.tags.join(', ') : '',
@@ -140,6 +142,7 @@ export default function EditProductPage() {
     try {
       const formDataToSend = new FormData();
       formDataToSend.append('title', formData.title);
+      if (formData.company) formDataToSend.append('company', formData.company);
       if (formData.price) formDataToSend.append('price', formData.price);
       formDataToSend.append('packSize', formData.packSize);
       formDataToSend.append('availability', formData.availability);
@@ -288,6 +291,21 @@ export default function EditProductPage() {
                 onChange={handleInputChange}
                 required
                 className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-chisco-petrol focus:border-transparent text-gray-900 placeholder-gray-500"
+              />
+            </div>
+
+            <div>
+              <label htmlFor="company" className="block text-sm font-medium text-gray-900 mb-2">
+                Company Name (Optional)
+              </label>
+              <input
+                type="text"
+                id="company"
+                name="company"
+                value={formData.company || ''}
+                onChange={handleInputChange}
+                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-chisco-petrol focus:border-transparent text-gray-900 placeholder-gray-500"
+                placeholder="e.g., Lube, LPG, PMS"
               />
             </div>
 
