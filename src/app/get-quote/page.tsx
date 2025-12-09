@@ -44,8 +44,31 @@ export default function GetQuotePage() {
     e.preventDefault();
     setIsSubmitting(true);
 
-    // Simulate form submission
-    await new Promise(resolve => setTimeout(resolve, 2000));
+    // Build WhatsApp message with form data
+    const message = `*Quote Request from Chisco Energy Website*
+
+*Contact Information:*
+• Name: ${formData.name}
+• Email: ${formData.email}
+• Phone: ${formData.phone}
+${formData.company ? `• Company: ${formData.company}` : ''}
+
+*Product Requirements:*
+• Product: ${formData.product}
+• Quantity: ${formData.quantity}
+• Delivery Location: ${formData.deliveryLocation}
+
+${formData.message ? `*Additional Message:*\n${formData.message}` : ''}`;
+
+    // Encode message for WhatsApp URL
+    const encodedMessage = encodeURIComponent(message);
+    const whatsappUrl = `https://wa.me/2348166319502?text=${encodedMessage}`;
+
+    // Small delay for UX feedback
+    await new Promise(resolve => setTimeout(resolve, 500));
+
+    // Open WhatsApp with the message
+    window.open(whatsappUrl, '_blank');
 
     setIsSubmitting(false);
     setSubmitted(true);

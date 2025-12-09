@@ -1,16 +1,29 @@
 'use client';
 
 import Link from 'next/link';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Image from 'next/image';
+import { useCartStore } from '@/lib/cart';
 
 interface NavBarProps {
   onOpenCart?: () => void;
-  cartCount?: number;
 }
 
-export default function NavBar({ onOpenCart, cartCount = 0 }: NavBarProps) {
+export default function NavBar({ onOpenCart }: NavBarProps) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [cartCount, setCartCount] = useState(0);
+  const items = useCartStore((state) => state.items);
+
+  // Handle hydration - update cart count after mount
+  useEffect(() => {
+    useCartStore.persist.rehydrate();
+  }, []);
+
+  // Update cart count when items change
+  useEffect(() => {
+    const count = items.reduce((total, item) => total + item.qty, 0);
+    setCartCount(count);
+  }, [items]);
 
   return (
     <nav className="w-full flex items-center justify-between py-4 px-6 bg-chisco-black shadow-sm sticky top-0 z-50">

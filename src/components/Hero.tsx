@@ -89,7 +89,7 @@ export default function Hero({
           </motion.a>
 
           <motion.a
-            href="#contact"
+            href="mailto:info@chiscoenergy.com"
             className="inline-flex items-center justify-center px-8 py-4 border-2 border-chisco-surface text-chisco-surface font-semibold rounded-xl hover:bg-chisco-surface hover:text-chisco-navy transition-all duration-200"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
