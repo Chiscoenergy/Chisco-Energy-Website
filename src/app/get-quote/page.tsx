@@ -26,6 +26,7 @@ export default function GetQuotePage() {
     'Dual Purpose Kerosene (DPK)',
     'Premium Motor Spirit (PMS)',
     'Low Pour Fuel Oil (LPFO)',
+    'Liquefied Petroleum Gas (LPG)',
     'Engine Lubricants',
     'Industrial Lubricants',
     'Other (Please specify)'
@@ -138,7 +139,7 @@ export default function GetQuotePage() {
                           required
                           value={formData.name}
                           onChange={handleInputChange}
-                          className="w-full px-4 py-3 rounded-2xl border border-white/30 bg-white/20 backdrop-blur-sm focus:ring-2 focus:ring-chisco-petrol focus:border-transparent transition-all duration-300"
+                          className="w-full px-4 py-3 rounded-2xl border border-gray-300 bg-white text-gray-900 placeholder-gray-500 focus:ring-2 focus:ring-chisco-petrol focus:border-transparent transition-all duration-300"
                           placeholder="Enter your full name"
                         />
                       </div>
@@ -154,7 +155,7 @@ export default function GetQuotePage() {
                           required
                           value={formData.email}
                           onChange={handleInputChange}
-                          className="w-full px-4 py-3 rounded-2xl border border-white/30 bg-white/20 backdrop-blur-sm focus:ring-2 focus:ring-chisco-petrol focus:border-transparent transition-all duration-300"
+                          className="w-full px-4 py-3 rounded-2xl border border-gray-300 bg-white text-gray-900 placeholder-gray-500 focus:ring-2 focus:ring-chisco-petrol focus:border-transparent transition-all duration-300"
                           placeholder="Enter your email"
                         />
                       </div>
@@ -170,7 +171,7 @@ export default function GetQuotePage() {
                           required
                           value={formData.phone}
                           onChange={handleInputChange}
-                          className="w-full px-4 py-3 rounded-2xl border border-white/30 bg-white/20 backdrop-blur-sm focus:ring-2 focus:ring-chisco-petrol focus:border-transparent transition-all duration-300"
+                          className="w-full px-4 py-3 rounded-2xl border border-gray-300 bg-white text-gray-900 placeholder-gray-500 focus:ring-2 focus:ring-chisco-petrol focus:border-transparent transition-all duration-300"
                           placeholder="Enter your phone number"
                         />
                       </div>
@@ -185,7 +186,7 @@ export default function GetQuotePage() {
                           name="company"
                           value={formData.company}
                           onChange={handleInputChange}
-                          className="w-full px-4 py-3 rounded-2xl border border-white/30 bg-white/20 backdrop-blur-sm focus:ring-2 focus:ring-chisco-petrol focus:border-transparent transition-all duration-300"
+                          className="w-full px-4 py-3 rounded-2xl border border-gray-300 bg-white text-gray-900 placeholder-gray-500 focus:ring-2 focus:ring-chisco-petrol focus:border-transparent transition-all duration-300"
                           placeholder="Enter your company name"
                         />
                       </div>
@@ -205,7 +206,7 @@ export default function GetQuotePage() {
                           required
                           value={formData.product}
                           onChange={handleInputChange}
-                          className="w-full px-4 py-3 rounded-2xl border border-white/30 bg-white/20 backdrop-blur-sm focus:ring-2 focus:ring-chisco-petrol focus:border-transparent transition-all duration-300"
+                          className="w-full px-4 py-3 rounded-2xl border border-gray-300 bg-white text-gray-900 focus:ring-2 focus:ring-chisco-petrol focus:border-transparent transition-all duration-300"
                         >
                           <option value="">Select a product</option>
                           {products.map((product, index) => (
@@ -225,7 +226,7 @@ export default function GetQuotePage() {
                           required
                           value={formData.quantity}
                           onChange={handleInputChange}
-                          className="w-full px-4 py-3 rounded-2xl border border-white/30 bg-white/20 backdrop-blur-sm focus:ring-2 focus:ring-chisco-petrol focus:border-transparent transition-all duration-300"
+                          className="w-full px-4 py-3 rounded-2xl border border-gray-300 bg-white text-gray-900 placeholder-gray-500 focus:ring-2 focus:ring-chisco-petrol focus:border-transparent transition-all duration-300"
                           placeholder="e.g., 1000 liters, 500kg"
                         />
                       </div>
@@ -241,7 +242,7 @@ export default function GetQuotePage() {
                           required
                           value={formData.deliveryLocation}
                           onChange={handleInputChange}
-                          className="w-full px-4 py-3 rounded-2xl border border-white/30 bg-white/20 backdrop-blur-sm focus:ring-2 focus:ring-chisco-petrol focus:border-transparent transition-all duration-300"
+                          className="w-full px-4 py-3 rounded-2xl border border-gray-300 bg-white text-gray-900 placeholder-gray-500 focus:ring-2 focus:ring-chisco-petrol focus:border-transparent transition-all duration-300"
                           placeholder="City, State, Nigeria"
                         />
                       </div>
@@ -259,7 +260,7 @@ export default function GetQuotePage() {
                       rows={4}
                       value={formData.message}
                       onChange={handleInputChange}
-                      className="w-full px-4 py-3 rounded-2xl border border-white/30 bg-white/20 backdrop-blur-sm focus:ring-2 focus:ring-chisco-petrol focus:border-transparent transition-all duration-300 resize-none"
+                      className="w-full px-4 py-3 rounded-2xl border border-gray-300 bg-white text-gray-900 placeholder-gray-500 focus:ring-2 focus:ring-chisco-petrol focus:border-transparent transition-all duration-300 resize-none"
                       placeholder="Any special requirements or additional information..."
                     />
                   </div>
