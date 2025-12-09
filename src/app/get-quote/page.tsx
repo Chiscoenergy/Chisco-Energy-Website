@@ -325,7 +325,7 @@ export default function GetQuotePage() {
                 <h3 className="text-white font-bold mb-2">WhatsApp</h3>
                 <p className="text-white/80 text-sm mb-3">Instant support</p>
                 <a
-                  href="https://wa.me/2342013303370?text=Hello%20Chisco%20Energy%2C%20I%27d%20like%20to%20inquire%20about%20your%20fuel%20services."
+                  href="https://wa.me/2348166319502?text=Hello%20Chisco%20Energy%2C%20I%27d%20like%20to%20inquire%20about%20your%20fuel%20services."
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center px-4 py-2 bg-green-600 text-white rounded-xl hover:bg-green-700 transition-colors text-sm"

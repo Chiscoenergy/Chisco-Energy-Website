@@ -54,7 +54,7 @@ export default function Home() {
 
   const handleContactWhatsApp = () => {
     const message = encodeURIComponent('Hello Chisco Energy, I\'d like to inquire about your fuel services.');
-    window.open(`https://wa.me/2342013303370?text=${message}`, '_blank');
+    window.open(`https://wa.me/2348166319502?text=${message}`, '_blank');
   };
 
   return (

@@ -164,7 +164,7 @@ export default function Footer() {
             {/* Our Clients section removed per request */}
 
             <a
-              href="https://wa.me/2342013303370?text=Hello%20Chisco%20Energy%2C%20I%27d%20like%20to%20inquire%20about%20your%20fuel%20services."
+              href="https://wa.me/2348166319502?text=Hello%20Chisco%20Energy%2C%20I%27d%20like%20to%20inquire%20about%20your%20fuel%20services."
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center w-full px-4 py-3 bg-green-600 text-white font-semibold rounded-xl hover:bg-green-700 transition-all duration-300 transform hover:-translate-y-1 hover:shadow-xl justify-center mt-4"
