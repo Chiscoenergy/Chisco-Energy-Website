@@ -11,7 +11,7 @@ export default function CartPage() {
   const [showCheckout, setShowCheckout] = useState(false);
 
   return (
-    <div className="min-h-screen bg-chisco-surface">
+    <div className="min-h-screen bg-white">
       {/* Navigation */}
       <NavBar />
 

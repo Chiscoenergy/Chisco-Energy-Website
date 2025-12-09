@@ -31,12 +31,7 @@
   --color-success: var(--success);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
+/* Force light mode for consistent appearance */
 
 body {
   background: var(--background);
