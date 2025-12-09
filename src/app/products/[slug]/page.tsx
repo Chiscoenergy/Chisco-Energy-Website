@@ -163,7 +163,7 @@ export default function ProductDetailPage() {
             {/* Simple purchase controls (quantity + add to cart) */}
             <div className="space-y-4">
               <div className="space-y-2">
-                <label htmlFor="quantity" className="block text-sm font-medium text-gray-900">
+                <label htmlFor="quantity" className="block text-sm font-medium text-chisco-ink">
                   Quantity
                 </label>
                 <div className="flex items-center space-x-3">
@@ -171,9 +171,9 @@ export default function ProductDetailPage() {
                     onClick={() => handleQuantityChange(quantity - 1)}
                     disabled={quantity <= 1}
                     aria-label="Decrease quantity"
-                    className="w-10 h-10 rounded-md border border-chisco-steel flex items-center justify-center disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-50"
+                    className="w-10 h-10 rounded-md border-2 border-chisco-navy bg-white text-chisco-navy font-bold text-lg flex items-center justify-center disabled:opacity-50 disabled:cursor-not-allowed hover:bg-chisco-navy hover:text-white transition-colors"
                   >
-                    -
+                    −
                   </button>
                   <input
                     id="quantity"
@@ -182,13 +182,13 @@ export default function ProductDetailPage() {
                     max="999"
                     value={quantity}
                     onChange={(e) => handleQuantityChange(parseInt(e.target.value) || 1)}
-                    className="w-20 text-center rounded-md border border-chisco-steel px-3 py-2 focus:ring-2 focus:ring-chisco-petrol focus:border-transparent"
+                    className="w-20 text-center rounded-md border-2 border-chisco-navy bg-white text-chisco-navy font-bold text-lg px-3 py-2 focus:ring-2 focus:ring-chisco-petrol focus:border-chisco-petrol"
                   />
                   <button
                     onClick={() => handleQuantityChange(quantity + 1)}
                     disabled={quantity >= 999}
                     aria-label="Increase quantity"
-                    className="w-10 h-10 rounded-md border border-chisco-steel flex items-center justify-center disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-50"
+                    className="w-10 h-10 rounded-md border-2 border-chisco-navy bg-white text-chisco-navy font-bold text-lg flex items-center justify-center disabled:opacity-50 disabled:cursor-not-allowed hover:bg-chisco-navy hover:text-white transition-colors"
                   >
                     +
                   </button>

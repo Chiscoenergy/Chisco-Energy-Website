@@ -135,7 +135,7 @@ export default function Home() {
                   </svg>
                 </Link>
                 <a
-                  href="https://wa.me/2342013303370?text=Hello%20Chisco%20Energy%2C%20I%27d%20like%20to%20inquire%20about%20your%20fuel%20services."
+                  href="https://wa.me/2348166319502?text=Hello%20Chisco%20Energy%2C%20I%27d%20like%20to%20inquire%20about%20your%20fuel%20services."
                   target="_blank"
                   rel="noopener noreferrer"
                   className="group inline-flex items-center justify-center px-6 lg:px-8 py-3 lg:py-4 border-2 border-chisco-petrol text-chisco-petrol font-semibold rounded-2xl hover:bg-chisco-petrol hover:text-white transition-all duration-300 hover:shadow-lg"

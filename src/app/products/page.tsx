@@ -10,6 +10,7 @@ import { useCartStore } from '@/lib/cart';
 
 export default function ProductsPage() {
   const [searchQuery, setSearchQuery] = useState('');
+  const [showSuggestions, setShowSuggestions] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState('all');
   const [sortBy, setSortBy] = useState('name');
   const [products, setProducts] = useState<Product[]>([]);
@@ -43,6 +44,18 @@ export default function ProductsPage() {
     const cats = new Set(products.flatMap((product: Product) => product.tags || []));
     return ['all', ...Array.from(cats)];
   }, [products]);
+
+  // Get autocomplete suggestions
+  const suggestions = useMemo(() => {
+    if (!searchQuery.trim()) return [];
+    const searchLower = searchQuery.toLowerCase();
+    return products
+      .filter((product: Product) =>
+        product.title.toLowerCase().includes(searchLower)
+      )
+      .slice(0, 8)
+      .map((product: Product) => product.title);
+  }, [products, searchQuery]);
 
   // Filter and sort products
   const filteredProducts = useMemo(() => {
@@ -130,11 +143,39 @@ export default function ProductsPage() {
                     placeholder="Search by name or description..."
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
-                    className="w-full pl-12 pr-4 py-4 rounded-2xl border border-white/30 bg-white/20 backdrop-blur-sm focus:ring-2 focus:ring-chisco-petrol focus:border-transparent transition-all duration-300 shadow-lg placeholder:text-chisco-navy/70"
+                    onFocus={() => setShowSuggestions(true)}
+                    className="w-full pl-12 pr-4 py-4 rounded-2xl border border-white/30 bg-white text-chisco-navy backdrop-blur-sm focus:ring-2 focus:ring-chisco-petrol focus:border-transparent transition-all duration-300 shadow-lg placeholder:text-chisco-steel"
                   />
                   <svg className="absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-chisco-navy/70" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                   </svg>
+
+                  {/* Autocomplete suggestions dropdown */}
+                  {showSuggestions && suggestions.length > 0 && (
+                    <div className="absolute top-full left-0 right-0 mt-2 bg-white border border-chisco-navy/20 rounded-xl shadow-lg z-50">
+                      {suggestions.map((suggestion, index) => (
+                        <button
+                          key={index}
+                          onClick={() => {
+                            setSearchQuery(suggestion);
+                            setShowSuggestions(false);
+                          }}
+                          className="w-full text-left px-4 py-3 text-chisco-navy hover:bg-chisco-navy/5 transition-colors border-b border-chisco-navy/10 last:border-b-0 text-sm"
+                        >
+                          {suggestion}
+                        </button>
+                      ))}
+                    </div>
+                  )}
+
+                  {/* Close suggestions when clicking outside */}
+                  {showSuggestions && (
+                    <div
+                      onClick={() => setShowSuggestions(false)}
+                      className="fixed inset-0 z-40"
+                      style={{ pointerEvents: suggestions.length > 0 ? 'auto' : 'none' }}
+                    />
+                  )}
                 </div>
               </div>
 
