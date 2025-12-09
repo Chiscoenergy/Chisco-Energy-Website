@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import NavBar from '@/components/NavBar';
+import CartDrawer from '@/components/CartDrawer';
 import { Product } from '@/types/product';
 import { useCartStore } from '@/lib/cart';
 
@@ -15,6 +16,7 @@ export default function ProductsPage() {
   const [sortBy, setSortBy] = useState('name');
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
+  const [cartOpen, setCartOpen] = useState(false);
   const { addItem } = useCartStore();
   const router = useRouter();
 
@@ -102,7 +104,7 @@ export default function ProductsPage() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-chisco-surface via-chisco-surface/80 to-chisco-navy/20">
       {/* Navigation */}
-      <NavBar />
+      <NavBar onOpenCart={() => setCartOpen(true)} />
 
       {/* Header */}
       <div className="relative overflow-hidden">
@@ -357,6 +359,12 @@ export default function ProductsPage() {
           </>
         )}
       </div>
+
+      {/* Cart Drawer */}
+      <CartDrawer
+        isOpen={cartOpen}
+        onClose={() => setCartOpen(false)}
+      />
     </div>
   );
 }

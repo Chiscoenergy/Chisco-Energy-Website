@@ -5,6 +5,7 @@ import { useParams } from 'next/navigation';
 import Link from 'next/link';
 import Image from 'next/image';
 import NavBar from '@/components/NavBar';
+import CartDrawer from '@/components/CartDrawer';
 import { Product } from '@/types/product';
 import { useCartStore } from '@/lib/cart';
 
@@ -15,6 +16,7 @@ export default function ProductDetailPage() {
   const [quantity, setQuantity] = useState(1);
   const [product, setProduct] = useState<Product | null>(null);
   const [loading, setLoading] = useState(true);
+  const [cartOpen, setCartOpen] = useState(false);
   const { addItem } = useCartStore();
 
   useEffect(() => {
@@ -85,7 +87,7 @@ export default function ProductDetailPage() {
   return (
     <div className="min-h-screen bg-chisco-surface">
       {/* Navigation */}
-      <NavBar />
+      <NavBar onOpenCart={() => setCartOpen(true)} />
 
       {/* Breadcrumb */}
       <div className="bg-white border-b">
@@ -212,6 +214,12 @@ export default function ProductDetailPage() {
           </div>
         </div>
       </div>
+
+      {/* Cart Drawer */}
+      <CartDrawer
+        isOpen={cartOpen}
+        onClose={() => setCartOpen(false)}
+      />
     </div>
   );
 }
