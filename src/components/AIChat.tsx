@@ -110,8 +110,8 @@ export default function AIChat({ isOpen, onClose }: AIChatProps) {
   if (!isOpen) return null;
 
   return (
-    <div className="fixed bottom-4 right-4 z-50">
-      <div className="bg-white rounded-lg shadow-xl w-96 h-[500px] flex flex-col">
+    <div className="fixed bottom-0 right-0 sm:bottom-4 sm:right-4 z-50 w-full sm:w-auto">
+      <div className="bg-white sm:rounded-lg shadow-xl w-full sm:w-96 h-[100dvh] sm:h-[500px] flex flex-col">
         {/* Header */}
         <div className="bg-chisco-navy text-white p-4 rounded-t-lg flex items-center justify-between">
           <div className="flex items-center space-x-3">

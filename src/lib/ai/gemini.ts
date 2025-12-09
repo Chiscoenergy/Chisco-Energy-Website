@@ -6,14 +6,8 @@ const API_KEY = process.env.GEMINI_API_KEY;
 let genAI: GoogleGenerativeAI;
 let model: ReturnType<GoogleGenerativeAI["getGenerativeModel"]>;
 
-// List of model names to try in order of preference (based on October 2025 Google AI docs)
-const MODEL_NAMES = [
-  "gemini-2.5-flash", // Current best price-performance model (recommended)
-  "gemini-2.5-pro", // Most advanced thinking model
-  "gemini-2.5-flash-lite", // Fastest and most cost-efficient
-  "gemini-2.0-flash", // Previous generation workhorse
-  "gemini-2.0-flash-lite", // Previous generation fast model
-];
+// List of model names to try in order of preference
+const MODEL_NAMES = ["gemini-2.5-flash-lite"];
 
 try {
   console.log("🔑 Initializing Gemini with API key:", !!API_KEY);

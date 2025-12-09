@@ -109,7 +109,7 @@ export default function CheckoutDialog({ isOpen, onClose, onSuccess }: CheckoutD
                 {...register('fullName', { required: 'Full name is required' })}
                 type="text"
                 id="fullName"
-                className="w-full rounded-lg border border-chisco-steel px-3 py-2 focus:ring-2 focus:ring-chisco-petrol focus:border-transparent"
+                className="w-full rounded-lg border border-gray-300 bg-white px-3 py-2 text-gray-900 placeholder-gray-500 focus:ring-2 focus:ring-chisco-petrol focus:border-transparent"
                 placeholder="Enter your full name"
               />
               {errors.fullName && (
@@ -128,7 +128,7 @@ export default function CheckoutDialog({ isOpen, onClose, onSuccess }: CheckoutD
                 {...register('address', { required: 'Delivery address is required' })}
                 id="address"
                 rows={3}
-                className="w-full rounded-lg border border-chisco-steel px-3 py-2 focus:ring-2 focus:ring-chisco-petrol focus:border-transparent resize-none"
+                className="w-full rounded-lg border border-gray-300 bg-white px-3 py-2 text-gray-900 placeholder-gray-500 focus:ring-2 focus:ring-chisco-petrol focus:border-transparent resize-none"
                 placeholder="Enter your delivery address"
               />
               {errors.address && (
@@ -145,7 +145,7 @@ export default function CheckoutDialog({ isOpen, onClose, onSuccess }: CheckoutD
                 {...register('dateTime')}
                 type="datetime-local"
                 id="dateTime"
-                className="w-full rounded-lg border border-chisco-steel px-3 py-2 focus:ring-2 focus:ring-chisco-petrol focus:border-transparent"
+                className="w-full rounded-lg border border-gray-300 bg-white px-3 py-2 text-gray-900 focus:ring-2 focus:ring-chisco-petrol focus:border-transparent"
               />
               <p className="text-xs text-chisco-steel mt-1">Optional - we&apos;ll contact you to confirm availability</p>
             </div>
@@ -159,7 +159,7 @@ export default function CheckoutDialog({ isOpen, onClose, onSuccess }: CheckoutD
                 {...register('additionalNotes')}
                 id="additionalNotes"
                 rows={2}
-                className="w-full rounded-lg border border-chisco-steel px-3 py-2 focus:ring-2 focus:ring-chisco-petrol focus:border-transparent resize-none"
+                className="w-full rounded-lg border border-gray-300 bg-white px-3 py-2 text-gray-900 placeholder-gray-500 focus:ring-2 focus:ring-chisco-petrol focus:border-transparent resize-none"
                 placeholder="Any special instructions or requirements..."
               />
             </div>
