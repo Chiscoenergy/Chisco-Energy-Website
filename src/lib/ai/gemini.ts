@@ -1,7 +1,7 @@
 import { GoogleGenerativeAI } from "@google/generative-ai";
 
 // List of model names to try in order of preference
-const MODEL_NAMES = ["gemini-2.0-flash-lite"];
+const MODEL_NAMES = ["gemini-flash-latest"];
 
 const SYSTEM_INSTRUCTION = `You are ChiscoBot, an AI assistant for Chisco Energy, a leading petroleum products company in Nigeria. You help customers with information about our services, products, and general inquiries.
 
