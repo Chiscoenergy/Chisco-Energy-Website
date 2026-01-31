@@ -251,7 +251,7 @@ export class GeminiChatService {
 
       if (error instanceof Error) {
         console.error("❌ Error name:", error.name);
-        console.error("❌ Error message:", error.message);
+        console.error("❌ Error message:", error.message); 
 
         // Check for specific Google API errors
         if (
