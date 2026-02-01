@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Afacad, Inter } from "next/font/google";
 import "./globals.css";
 import ChatButton from "@/components/ChatButton";
+import MaintenanceOverlay from "@/components/MaintenanceOverlay";
 
 const afacad = Afacad({
   variable: "--font-afacad",
@@ -24,6 +25,8 @@ export const metadata: Metadata = {
   },
 };
 
+const IS_SITE_DOWN = true;
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -34,8 +37,14 @@ export default function RootLayout({
       <body
         className={`${afacad.variable} ${inter.variable} antialiased overflow-x-hidden`}
       >
-        {children}
-        <ChatButton />
+        {IS_SITE_DOWN ? (
+          <MaintenanceOverlay />
+        ) : (
+          <>
+            {children}
+            <ChatButton />
+          </>
+        )}
       </body>
     </html>
   );

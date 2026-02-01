@@ -18,7 +18,8 @@ export function middleware(request: NextRequest) {
     return new NextResponse(
       JSON.stringify({
         error: "Service Unavailable",
-        message: "This service is currently suspended due to non-payment.",
+        message:
+          "This service is currently undergoing scheduled maintenance. Please contact support via WhatsApp or email.",
       }),
       { status: 503, headers: { "content-type": "application/json" } },
     );
