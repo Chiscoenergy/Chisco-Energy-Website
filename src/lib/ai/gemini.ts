@@ -251,7 +251,7 @@ export class GeminiChatService {
 
       if (error instanceof Error) {
         console.error("❌ Error name:", error.name);
-        console.error("❌ Error message:", error.message); 
+        console.error("❌ Error message:", error.message);
 
         // Check for specific Google API errors
         if (
@@ -268,7 +268,7 @@ export class GeminiChatService {
         }
         if (error.message.includes("PERMISSION_DENIED")) {
           throw new Error(
-            `Permission denied - check API key permissions: ${error.message}`
+            `Permission denied - check API key permissions: ${error.message}`,
           );
         }
         throw new Error(`Gemini API error: ${error.message}`);
