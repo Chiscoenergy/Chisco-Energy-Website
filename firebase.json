@@ -1,0 +1,28 @@
+{
+  "hosting": {
+    "source": ".",
+    "frameworksBackend": {
+      "region": "us-central1",
+      "runtime": "nodejs20",
+      "env": {
+        "NEXT_PUBLIC_FIREBASE_API_KEY": "AIzaSyDpOprFnkoJZQZ934Jmp-BDJEtHqA2ldk8",
+        "NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN": "chisco-energy.firebaseapp.com",
+        "NEXT_PUBLIC_FIREBASE_PROJECT_ID": "chisco-energy",
+        "NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET": "chisco-energy.firebasestorage.app",
+        "NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID": "444455520979",
+        "NEXT_PUBLIC_FIREBASE_APP_ID": "1:444455520979:web:de0e03fc71895183972226c",
+        "NEXT_PUBLIC_WHATSAPP_NUMBER": "2348166319502"
+      },
+      "secretEnvironmentVariables": [
+        { "key": "GEMINI_API_KEY", "secret": "gemini_api_key" },
+        { "key": "ADMIN_EMAIL", "secret": "admin_email" },
+        { "key": "ADMIN_PASSWORD", "secret": "admin_password" }
+      ]
+    },
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules"
+    ]
+  }
+}
