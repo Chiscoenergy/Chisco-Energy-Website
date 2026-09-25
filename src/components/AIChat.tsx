@@ -58,12 +58,17 @@ export default function AIChat({ isOpen, onClose }: AIChatProps) {
     setIsLoading(true);
 
     try {
+      const conversation = [...messages, userMessage].map(({ role, content }) => ({
+        role,
+        content,
+      }));
+
       const response = await fetch('/api/ai/chat', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ message: userMessage.content }),
+        body: JSON.stringify({ messages: conversation }),
       });
 
       const data = await response.json();
@@ -81,7 +86,7 @@ export default function AIChat({ isOpen, onClose }: AIChatProps) {
         const errorMessage: Message = {
           id: (Date.now() + 1).toString(),
           role: 'assistant',
-          content: `I'm having trouble connecting right now (Error ${response.status}). Please ensure the development server is running and try again.`,
+          content: data.error || `I'm having trouble connecting right now (Error ${response.status}). Please try again shortly.`,
           timestamp: new Date(),
         };
         setMessages(prev => [...prev, errorMessage]);
