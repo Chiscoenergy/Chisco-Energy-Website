@@ -284,8 +284,8 @@ export default function ProductsPage() {
                   key={product.id}
                   role="button"
                   tabIndex={0}
-                  onClick={() => router.push(`/products/${product.slug}`)}
-                  onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') router.push(`/products/${product.slug}`); }}
+                  onClick={() => router.push(`/products/${encodeURIComponent(product.id)}`)}
+                  onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') router.push(`/products/${encodeURIComponent(product.id)}`); }}
                   className="group cursor-pointer bg-white/10 backdrop-blur-xl rounded-3xl shadow-2xl hover:shadow-3xl hover:shadow-chisco-petrol/20 transition-all duration-500 transform hover:-translate-y-3 border border-white/20 overflow-hidden relative"
                 >
                   {/* Glass effect overlay */}

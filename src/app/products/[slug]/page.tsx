@@ -11,7 +11,7 @@ import { useCartStore } from '@/lib/cart';
 
 export default function ProductDetailPage() {
   const params = useParams();
-  const slug = params.slug as string;
+  const productId = params.slug as string;
   const [selectedImage, setSelectedImage] = useState(0);
   const [quantity, setQuantity] = useState(1);
   const [product, setProduct] = useState<Product | null>(null);
@@ -21,11 +21,11 @@ export default function ProductDetailPage() {
 
   useEffect(() => {
     fetchProduct();
-  }, [slug]);
+  }, [productId]);
 
   const fetchProduct = async () => {
     try {
-      const response = await fetch(`/api/products/by-slug/${slug}`);
+      const response = await fetch(`/api/products/${encodeURIComponent(productId)}`);
       if (response.ok) {
         const foundProduct = await response.json();
         setProduct(foundProduct);
