@@ -1,7 +1,11 @@
 import { jwtVerify } from "jose";
 import { NextRequest } from "next/server";
 
-const JWT_SECRET = process.env.JWT_SECRET || "your-secret-key";
+export function getAdminJwtSecret(): string | null {
+  // ADMIN_PASSWORD is already a private server-side secret and provides a
+  // backward-compatible signing key when JWT_SECRET has not been configured.
+  return process.env.JWT_SECRET || process.env.ADMIN_PASSWORD || null;
+}
 
 export interface AdminUser {
   email: string;
@@ -12,9 +16,12 @@ export async function verifyAdminToken(
   token: string
 ): Promise<AdminUser | null> {
   try {
+    const secret = getAdminJwtSecret();
+    if (!secret) return null;
+
     const { payload } = await jwtVerify(
       token,
-      new TextEncoder().encode(JWT_SECRET)
+      new TextEncoder().encode(secret)
     );
     return {
       email: payload.email as string,
