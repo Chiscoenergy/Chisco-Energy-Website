@@ -218,7 +218,7 @@ export default function AdminProductsPage() {
 
                   <div className="flex space-x-2">
                     <Link
-                      href={`/admin/products/${product.id}/edit`}
+                      href={`/admin/products/edit?id=${encodeURIComponent(product.id)}`}
                       className="flex-1 bg-chisco-navy text-white px-3 py-2 rounded-lg hover:bg-chisco-petrol transition-colors text-sm font-medium text-center"
                     >
                       Edit
