@@ -117,7 +117,7 @@ export default function EditProductPage() {
     }
   }
 
-  if (isLoading) return <div className="flex min-h-screen items-center justify-center bg-gray-100 text-gray-600">Loading product…</div>;
+  if (isLoading) return <div role="status" aria-live="polite" className="flex min-h-screen items-center justify-center bg-gray-100 text-gray-600">Loading product…</div>;
 
   return (
     <div className="min-h-screen bg-gray-100">
