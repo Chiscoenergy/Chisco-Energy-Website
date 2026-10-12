@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { Product } from '@/types/product';
@@ -9,18 +9,31 @@ export default function AdminProductsPage() {
   const [isLoading, setIsLoading] = useState(true);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [products, setProducts] = useState<Product[]>([]);
+  const [loadError, setLoadError] = useState('');
   const [searchTerm, setSearchTerm] = useState('');
   const router = useRouter();
 
-  useEffect(() => {
-    checkAuth();
+  const loadProducts = useCallback(async () => {
+    try {
+      const response = await fetch('/api/admin/products');
+      if (response.ok) {
+        const data = await response.json();
+        setProducts(Array.isArray(data.products) ? data.products : []);
+        setLoadError('');
+      } else {
+        setLoadError('Could not load products. Please refresh and try again.');
+      }
+    } catch (error) {
+      console.error('Error loading products:', error);
+      setLoadError('Could not load products. Check your connection and try again.');
+    }
   }, []);
 
   // Refresh products when page becomes visible (e.g., returning from edit page)
   useEffect(() => {
     const handleVisibilityChange = () => {
       if (!document.hidden && isAuthenticated) {
-        loadProducts();
+        void loadProducts();
       }
     };
 
@@ -28,14 +41,14 @@ export default function AdminProductsPage() {
     return () => {
       document.removeEventListener('visibilitychange', handleVisibilityChange);
     };
-  }, [isAuthenticated]);
+  }, [isAuthenticated, loadProducts]);
 
-  const checkAuth = async () => {
+  const checkAuth = useCallback(async () => {
     try {
       const response = await fetch('/api/admin/auth/check');
       if (response.ok) {
         setIsAuthenticated(true);
-        loadProducts();
+        void loadProducts();
       } else {
         router.push('/admin');
       }
@@ -44,27 +57,17 @@ export default function AdminProductsPage() {
     } finally {
       setIsLoading(false);
     }
-  };
+  }, [loadProducts, router]);
 
-  const loadProducts = async () => {
-    try {
-      const response = await fetch('/api/admin/products');
-      if (response.ok) {
-        const data = await response.json();
-        setProducts(data.products);
-      } else {
-        console.error('Failed to load products');
-      }
-    } catch (error) {
-      console.error('Error loading products:', error);
-    }
-  };
+  useEffect(() => {
+    void checkAuth();
+  }, [checkAuth]);
 
   const handleDeleteProduct = async (productId: string) => {
     if (!confirm('Are you sure you want to delete this product?')) return;
 
     try {
-      const response = await fetch(`/api/admin/products/${productId}`, {
+      const response = await fetch(`/api/admin/products/item?id=${encodeURIComponent(productId)}`, {
         method: 'DELETE',
       });
 
@@ -151,7 +154,11 @@ export default function AdminProductsPage() {
         </div>
 
         {/* Products Grid */}
-        {filteredProducts.length === 0 ? (
+        {loadError ? (
+          <div role="alert" className="rounded-lg border border-red-200 bg-red-50 p-4 text-sm text-red-700">
+            {loadError}
+          </div>
+        ) : filteredProducts.length === 0 ? (
           <div className="text-center py-12">
             <svg className="w-12 h-12 text-gray-400 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
@@ -197,9 +204,11 @@ export default function AdminProductsPage() {
                         <span className="text-sm text-gray-600">{product.packSize ?? ''}</span>
                         <span className={`px-2 py-1 rounded-full text-xs font-medium ${product.availability === 'in-stock'
                           ? 'bg-green-100 text-green-800'
-                          : 'bg-red-100 text-red-800'
+                          : product.availability === 'pre-order'
+                            ? 'bg-amber-100 text-amber-800'
+                            : 'bg-red-100 text-red-800'
                           }`}>
-                          {product.availability === 'in-stock' ? 'In Stock' : 'Out of Stock'}
+                          {product.availability === 'in-stock' ? 'In Stock' : product.availability === 'pre-order' ? 'Pre-order' : 'Out of Stock'}
                         </span>
                       </div>
                     </div>

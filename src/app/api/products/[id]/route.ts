@@ -1,5 +1,11 @@
 import { NextRequest, NextResponse } from "next/server";
+import { getAdminUser } from "@/lib/auth/admin";
 import { productService } from "@/lib/firebase-products";
+
+async function isAdmin(request: NextRequest) {
+  const user = await getAdminUser(request);
+  return user?.role === "admin";
+}
 
 // GET /api/products/[id] - Get single product
 export async function GET(
@@ -30,6 +36,7 @@ export async function PUT(
   request: NextRequest,
   { params }: { params: Promise<{ id: string }> }
 ) {
+  if (!(await isAdmin(request))) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   try {
     const { id } = await params;
     const body = await request.json();
@@ -51,6 +58,7 @@ export async function DELETE(
   request: NextRequest,
   { params }: { params: Promise<{ id: string }> }
 ) {
+  if (!(await isAdmin(request))) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   try {
     const { id } = await params;
     await productService.deleteProduct(id);

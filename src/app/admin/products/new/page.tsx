@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 
@@ -9,7 +9,7 @@ interface ProductForm {
   company?: string;
   packSize: string;
   sku: string;
-  availability: 'in-stock' | 'out-of-stock';
+  availability: 'in-stock' | 'out-of-stock' | 'pre-order';
   tags: string[];
   images: File[];
   price?: string;
@@ -30,11 +30,7 @@ export default function NewProductPage() {
   const [tagInput, setTagInput] = useState('');
   const router = useRouter();
 
-  useEffect(() => {
-    checkAuth();
-  }, []);
-
-  const checkAuth = async () => {
+  const checkAuth = useCallback(async () => {
     try {
       const response = await fetch('/api/admin/auth/check');
       if (response.ok) {
@@ -47,7 +43,11 @@ export default function NewProductPage() {
     } finally {
       setIsLoading(false);
     }
-  };
+  }, [router]);
+
+  useEffect(() => {
+    void checkAuth();
+  }, [checkAuth]);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target as HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement;
@@ -259,6 +259,7 @@ export default function NewProductPage() {
               >
                 <option value="in-stock">In Stock</option>
                 <option value="out-of-stock">Out of Stock</option>
+                <option value="pre-order">Pre-order</option>
               </select>
             </div>
 
