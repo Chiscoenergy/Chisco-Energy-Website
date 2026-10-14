@@ -1,23 +1,30 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
+import { Product } from '@/types/product';
 
 export default function AdminDashboard() {
   const [isLoading, setIsLoading] = useState(true);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [products, setProducts] = useState<Product[]>([]);
+  const [productsError, setProductsError] = useState('');
   const router = useRouter();
 
-  useEffect(() => {
-    checkAuth();
-  }, []);
-
-  const checkAuth = async () => {
+  const checkAuth = useCallback(async () => {
     try {
       const response = await fetch('/api/admin/auth/check');
       if (response.ok) {
         setIsAuthenticated(true);
+        try {
+          const productsResponse = await fetch('/api/admin/products');
+          if (!productsResponse.ok) throw new Error('Could not load product statistics.');
+          const data = await productsResponse.json();
+          setProducts(Array.isArray(data.products) ? data.products : []);
+        } catch (error) {
+          setProductsError(error instanceof Error ? error.message : 'Could not load product statistics.');
+        }
       } else {
         router.push('/admin');
       }
@@ -26,11 +33,16 @@ export default function AdminDashboard() {
     } finally {
       setIsLoading(false);
     }
-  };
+  }, [router]);
+
+  useEffect(() => {
+    void checkAuth();
+  }, [checkAuth]);
 
   const handleLogout = async () => {
     try {
-      await fetch('/api/admin/auth/logout', { method: 'POST' });
+      const response = await fetch('/api/admin/auth/logout', { method: 'POST' });
+      if (!response.ok) throw new Error('The session could not be cleared.');
       router.push('/admin');
     } catch (error) {
       console.error('Logout error:', error);
@@ -141,12 +153,12 @@ export default function AdminDashboard() {
         </div>
 
         {/* Quick Stats - Products Only */}
-        <div className="mt-8 grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div className="mt-8 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6">
           <div className="bg-white rounded-lg shadow p-6">
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-sm font-medium text-gray-600">Total Products</p>
-                <p className="text-2xl font-bold text-gray-900">12</p>
+                <p className="text-2xl font-bold text-gray-900">{products.length}</p>
               </div>
               <div className="p-3 bg-green-100 rounded-full">
                 <svg className="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -160,7 +172,7 @@ export default function AdminDashboard() {
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-sm font-medium text-gray-600">In Stock</p>
-                <p className="text-2xl font-bold text-gray-900">10</p>
+                <p className="text-2xl font-bold text-gray-900">{products.filter((product) => product.availability === 'in-stock').length}</p>
               </div>
               <div className="p-3 bg-blue-100 rounded-full">
                 <svg className="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -174,7 +186,7 @@ export default function AdminDashboard() {
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-sm font-medium text-gray-600">Out of Stock</p>
-                <p className="text-2xl font-bold text-gray-900">2</p>
+                <p className="text-2xl font-bold text-gray-900">{products.filter((product) => product.availability === 'out-of-stock').length}</p>
               </div>
               <div className="p-3 bg-red-100 rounded-full">
                 <svg className="w-6 h-6 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -183,7 +195,21 @@ export default function AdminDashboard() {
               </div>
             </div>
           </div>
+          <div className="bg-white rounded-lg shadow p-6">
+            <div className="flex items-center justify-between">
+              <div>
+                <p className="text-sm font-medium text-gray-600">Pre-order</p>
+                <p className="text-2xl font-bold text-gray-900">{products.filter((product) => product.availability === 'pre-order').length}</p>
+              </div>
+              <div className="p-3 bg-amber-100 rounded-full">
+                <svg className="w-6 h-6 text-amber-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+              </div>
+            </div>
+          </div>
         </div>
+        {productsError && <p role="alert" className="mt-3 text-sm text-red-700">{productsError}</p>}
 
         {/* Info Section */}
         <div className="mt-8 bg-blue-50 rounded-lg p-6">

@@ -6,6 +6,7 @@ import {
   doc,
   updateDoc,
   deleteDoc,
+  deleteField,
   query,
   orderBy,
 } from "firebase/firestore";
@@ -20,6 +21,7 @@ export interface ProductData {
   id?: string;
   slug: string;
   title: string;
+  company?: string;
   excerpt?: string;
   description?: string;
   price?: number;
@@ -31,6 +33,12 @@ export interface ProductData {
   createdAt: Date;
   updatedAt: Date;
 }
+
+type ProductUpdates = Partial<Omit<ProductData, "price" | "company" | "sku">> & {
+  price?: number | null;
+  company?: string | null;
+  sku?: string | null;
+};
 
 export class FirebaseProductService {
   private collectionName = "products";
@@ -92,13 +100,14 @@ export class FirebaseProductService {
   // Update product
   async updateProduct(
     productId: string,
-    updates: Partial<ProductData>
+    updates: ProductUpdates
   ): Promise<void> {
     try {
       // Remove undefined fields before updating
       const payload: Record<string, unknown> = { ...updates };
       Object.keys(payload).forEach((k) => {
         if (payload[k] === undefined) delete payload[k];
+        else if (payload[k] === null) payload[k] = deleteField();
       });
 
       const productRef = doc(db, this.collectionName, productId);

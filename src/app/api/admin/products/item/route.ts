@@ -48,6 +48,15 @@ export async function PUT(request: NextRequest) {
       (typeof input.price !== "number" || !Number.isFinite(input.price) || input.price < 0)) {
       return NextResponse.json({ error: "Price must be a non-negative number" }, { status: 400 });
     }
+    if (input.company !== undefined && input.company !== null && typeof input.company !== "string") {
+      return NextResponse.json({ error: "Company must be text" }, { status: 400 });
+    }
+    if (input.sku !== undefined && input.sku !== null && typeof input.sku !== "string") {
+      return NextResponse.json({ error: "SKU must be text" }, { status: 400 });
+    }
+    if (input.packSize !== undefined && typeof input.packSize !== "string") {
+      return NextResponse.json({ error: "Pack size must be text" }, { status: 400 });
+    }
     if (input.availability !== "in-stock" && input.availability !== "out-of-stock" && input.availability !== "pre-order") {
       return NextResponse.json({ error: "Invalid availability" }, { status: 400 });
     }
@@ -60,20 +69,41 @@ export async function PUT(request: NextRequest) {
       return NextResponse.json({ error: "Product not found" }, { status: 404 });
     }
 
-    await productService.updateProduct(id, {
+    const updates: Parameters<typeof productService.updateProduct>[1] = {
       slug: input.slug.trim(),
       title: input.title.trim(),
-      company: typeof input.company === "string" && input.company.trim() ? input.company.trim() : undefined,
-      price: typeof input.price === "number" ? Math.round(input.price * 100) / 100 : undefined,
-      packSize: typeof input.packSize === "string" ? input.packSize.trim() : "",
-      sku: typeof input.sku === "string" && input.sku.trim() ? input.sku.trim() : undefined,
       availability: input.availability,
-      tags: Array.isArray(input.tags) ? input.tags.filter((tag): tag is string => typeof tag === "string").map((tag) => tag.trim()).filter(Boolean) : [],
-    });
+    };
+    if (input.company !== undefined) updates.company = typeof input.company === "string" && input.company.trim() ? input.company.trim() : null;
+    if (input.price !== undefined) updates.price = typeof input.price === "number" ? Math.round(input.price * 100) / 100 : null;
+    if (input.packSize !== undefined) updates.packSize = input.packSize.trim();
+    if (input.sku !== undefined) updates.sku = typeof input.sku === "string" && input.sku.trim() ? input.sku.trim() : null;
+    if (Array.isArray(input.tags)) updates.tags = input.tags.map((tag) => tag.trim()).filter(Boolean);
+    await productService.updateProduct(id, updates);
 
     return NextResponse.json({ success: true });
   } catch (error) {
     console.error("Error updating admin product:", error);
     return NextResponse.json({ error: "Failed to update product" }, { status: 500 });
+  }
+}
+
+export async function DELETE(request: NextRequest) {
+  if (!(await isAdmin(request))) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  const id = getProductId(request);
+  if (!id) return NextResponse.json({ error: "Product id is required" }, { status: 400 });
+
+  try {
+    const products = await productService.getProducts();
+    const product = products.find((item) => item.id === id);
+    if (!product) return NextResponse.json({ error: "Product not found" }, { status: 404 });
+
+    await productService.deleteProduct(id);
+    // Storage cleanup is best-effort: a stale image must not make the catalog deletion fail.
+    await Promise.allSettled((product.images || []).map((imageUrl) => productService.deleteImage(imageUrl)));
+    return NextResponse.json({ success: true });
+  } catch (error) {
+    console.error("Error deleting admin product:", error);
+    return NextResponse.json({ error: "Failed to delete product" }, { status: 500 });
   }
 }
